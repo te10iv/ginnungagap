@@ -1,1 +1,0 @@
-中身は空です。test-aws-memo.mdです。
