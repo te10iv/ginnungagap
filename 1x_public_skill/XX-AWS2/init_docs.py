@@ -64,8 +64,8 @@ services = [
 doc_types = [
     "01_overview.md",
     "02_managedconsole_setup.md",
-    "03_cloudformation.md",
-    "04_terraform.md",
+    "03_cloudformation.yaml",
+    "04_terraform.tf",
     "05_operations.md",
 ]
 
