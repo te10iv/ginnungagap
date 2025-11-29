@@ -1,0 +1,3 @@
+あ、
+これはcopilot-test.txtです
+以上。
