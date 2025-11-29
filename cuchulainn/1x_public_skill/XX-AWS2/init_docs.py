@@ -1,7 +1,7 @@
 import os
 
 # ① リポジトリのベースディレクトリ（好きな名前でOK）
-BASE_DIR = "aws-docs/services"
+BASE_DIR = "services"
 
 # ② サービス一覧（ディレクトリ名, 表示名）
 services = [
@@ -63,7 +63,7 @@ services = [
 # ③ 作成するドキュメントの種類（ファイル名）
 doc_types = [
     "01_overview.md",
-    "02_console_setup.md",
+    "02_managedconsole_setup.md",
     "03_cloudformation.md",
     "04_terraform.md",
     "05_operations.md",
