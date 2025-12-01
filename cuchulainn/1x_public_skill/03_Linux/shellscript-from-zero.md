@@ -1,0 +1,21 @@
+
+
+
+#!/bin/bash
+
+echo "=== バックアップ開始 ==="
+
+# バックアップ元
+SOURCE="/var/www/html"
+# バックアップ先
+DEST="/backup/html_$(date +%Y%m%d)"
+
+# フォルダ作成
+mkdir -p "$DEST"
+
+# コピー
+cp -r "$SOURCE" "$DEST"
+
+echo "=== 完了しました ==="
+
+
