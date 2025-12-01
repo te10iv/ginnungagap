@@ -9,25 +9,25 @@
       
       
       
-        <link rel="prev" href="../../route53/05_operations/">
+        <link rel="prev" href="../../shellscript-from-zero/">
       
       
-        <link rel="next" href="../02_managedconsole_setup/">
+        <link rel="next" href="../%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E7%9B%A3%E8%A6%96%E3%83%BB%E5%86%8D%E8%B5%B7%E5%8B%95%EF%BC%88%E8%87%AA%E5%8B%95%E5%BE%A9%E6%97%A7%29/">
       
       
         
       
       
-      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
-        <title>S3 概要 - My Secret Wiki</title>
+        <title>!/bin/bash - My Secret Wiki</title>
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.618322db.min.css">
       
       
 
@@ -46,7 +46,7 @@
       
     
     
-    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#s3" class="md-skip">
+        <a href="#binbash" class="md-skip">
           Skip to content
         </a>
       
@@ -80,7 +80,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../../.." title="My Secret Wiki" class="md-header__button md-logo" aria-label="My Secret Wiki" data-md-component="logo">
+    <a href="../../../.." title="My Secret Wiki" class="md-header__button md-logo" aria-label="My Secret Wiki" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              S3 概要
+              !/bin/bash
             
           </span>
         </div>
@@ -178,7 +178,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../../.." title="My Secret Wiki" class="md-nav__button md-logo" aria-label="My Secret Wiki" data-md-component="logo">
+    <a href="../../../.." title="My Secret Wiki" class="md-nav__button md-logo" aria-label="My Secret Wiki" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -196,7 +196,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../.." class="md-nav__link">
+      <a href="../../../.." class="md-nav__link">
         
   
   
@@ -319,7 +319,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../02_Windows/test-windows-memo/" class="md-nav__link">
+      <a href="../../../02_Windows/test-windows-memo/" class="md-nav__link">
         
   
   
@@ -352,18 +352,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
@@ -384,7 +386,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -402,7 +404,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../03_Linux/linux-command/" class="md-nav__link">
+      <a href="../../linux-command/" class="md-nav__link">
         
   
   
@@ -430,7 +432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../03_Linux/shellscript-from-zero/" class="md-nav__link">
+      <a href="../../shellscript-from-zero/" class="md-nav__link">
         
   
   
@@ -455,18 +457,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_3" checked>
         
           
           <label class="md-nav__link" for="__nav_2_2_3" id="__nav_2_2_3_label" tabindex="0">
@@ -487,7 +491,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_2_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -502,10 +506,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../../03_Linux/%E3%82%B7%E3%82%A7%E3%83%AB%E5%80%89%E5%BA%AB/001_%E4%B8%80%E7%95%AA%E6%9C%80%E5%88%9D%E3%81%AE%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -521,6 +534,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -533,7 +547,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../03_Linux/%E3%82%B7%E3%82%A7%E3%83%AB%E5%80%89%E5%BA%AB/%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E7%9B%A3%E8%A6%96%E3%83%BB%E5%86%8D%E8%B5%B7%E5%8B%95%EF%BC%88%E8%87%AA%E5%8B%95%E5%BE%A9%E6%97%A7%29/" class="md-nav__link">
+      <a href="../%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E7%9B%A3%E8%A6%96%E3%83%BB%E5%86%8D%E8%B5%B7%E5%8B%95%EF%BC%88%E8%87%AA%E5%8B%95%E5%BE%A9%E6%97%A7%29/" class="md-nav__link">
         
   
   
@@ -624,7 +638,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../04_AWS/311_ECS%20on%20Fargate%28ALB%E3%81%AA%E3%81%97%29--%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../../04_AWS/311_ECS%20on%20Fargate%28ALB%E3%81%AA%E3%81%97%29--%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -652,7 +666,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../04_AWS/312_ECS%20on%20EC2%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../../04_AWS/312_ECS%20on%20EC2%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -727,7 +741,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../04_AWS/0xx_NW%28AWS%29/001_AWS%E3%81%AENW%E6%A7%8B%E6%88%90%E3%81%AE%E6%AD%A3%E8%A7%A3/" class="md-nav__link">
+      <a href="../../../04_AWS/0xx_NW%28AWS%29/001_AWS%E3%81%AENW%E6%A7%8B%E6%88%90%E3%81%AE%E6%AD%A3%E8%A7%A3/" class="md-nav__link">
         
   
   
@@ -755,7 +769,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../04_AWS/0xx_NW%28AWS%29/0xx_NW%28AWS%29/" class="md-nav__link">
+      <a href="../../../04_AWS/0xx_NW%28AWS%29/0xx_NW%28AWS%29/" class="md-nav__link">
         
   
   
@@ -838,7 +852,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../04_AWS/ecs/01_overview/" class="md-nav__link">
+      <a href="../../../04_AWS/ecs/01_overview/" class="md-nav__link">
         
   
   
@@ -866,7 +880,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../04_AWS/ecs/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../04_AWS/ecs/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -894,7 +908,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../04_AWS/ecs/02_%E3%80%90old%E3%80%91managedconsole_setup/" class="md-nav__link">
+      <a href="../../../04_AWS/ecs/02_%E3%80%90old%E3%80%91managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -922,7 +936,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../04_AWS/ecs/05_operations/" class="md-nav__link">
+      <a href="../../../04_AWS/ecs/05_operations/" class="md-nav__link">
         
   
   
@@ -1013,7 +1027,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../05_Azure/Azure%E8%B3%87%E6%A0%BC%E5%AF%BE%E7%AD%96%EF%BC%88%E5%88%9D%E5%BF%83%E8%80%85%E7%94%A8%EF%BC%89/" class="md-nav__link">
+      <a href="../../../05_Azure/Azure%E8%B3%87%E6%A0%BC%E5%AF%BE%E7%AD%96%EF%BC%88%E5%88%9D%E5%BF%83%E8%80%85%E7%94%A8%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -1143,7 +1157,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../21_AI/cursol/cursol/" class="md-nav__link">
+      <a href="../../../21_AI/cursol/cursol/" class="md-nav__link">
         
   
   
@@ -1234,7 +1248,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../42_Docker/docker%28m1%20mac%29%E3%81%A7AlmaLinux%E5%8B%95%E3%81%8B%E3%81%99/" class="md-nav__link">
+      <a href="../../../42_Docker/docker%28m1%20mac%29%E3%81%A7AlmaLinux%E5%8B%95%E3%81%8B%E3%81%99/" class="md-nav__link">
         
   
   
@@ -1262,7 +1276,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../42_Docker/docker%E3%81%AE%E7%8A%B6%E6%85%8B%E9%81%B7%E7%A7%BB%E3%81%A8%E3%80%81%E3%83%A1%E3%83%A2%E3%83%AA%E5%AE%B9%E9%87%8F%E3%81%A8%E3%81%AE%E9%96%A2%E4%BF%82%E3%80%81%E5%89%8A%E9%99%A4%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../../42_Docker/docker%E3%81%AE%E7%8A%B6%E6%85%8B%E9%81%B7%E7%A7%BB%E3%81%A8%E3%80%81%E3%83%A1%E3%83%A2%E3%83%AA%E5%AE%B9%E9%87%8F%E3%81%A8%E3%81%AE%E9%96%A2%E4%BF%82%E3%80%81%E5%89%8A%E9%99%A4%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -1290,7 +1304,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../42_Docker/docker%E5%9F%BA%E7%A4%8E/" class="md-nav__link">
+      <a href="../../../42_Docker/docker%E5%9F%BA%E7%A4%8E/" class="md-nav__link">
         
   
   
@@ -1318,7 +1332,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../42_Docker/docker%E5%9F%BA%E7%A4%8E%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E6%97%A9%E8%A6%8B%E8%A1%A8/" class="md-nav__link">
+      <a href="../../../42_Docker/docker%E5%9F%BA%E7%A4%8E%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E6%97%A9%E8%A6%8B%E8%A1%A8/" class="md-nav__link">
         
   
   
@@ -1351,20 +1365,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
         
           
           <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
@@ -1385,7 +1397,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1400,20 +1412,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_1" >
         
           
           <label class="md-nav__link" for="__nav_2_7_1" id="__nav_2_7_1_label" tabindex="0">
@@ -1434,7 +1444,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_7_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1499,7 +1509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api-gateway/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/api-gateway/01_overview/" class="md-nav__link">
         
   
   
@@ -1527,7 +1537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api-gateway/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/api-gateway/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -1555,7 +1565,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api-gateway/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/api-gateway/05_operations/" class="md-nav__link">
         
   
   
@@ -1638,7 +1648,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../athena/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/athena/01_overview/" class="md-nav__link">
         
   
   
@@ -1666,7 +1676,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../athena/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/athena/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -1694,7 +1704,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../athena/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/athena/05_operations/" class="md-nav__link">
         
   
   
@@ -1777,7 +1787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aurora/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/aurora/01_overview/" class="md-nav__link">
         
   
   
@@ -1805,7 +1815,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aurora/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/aurora/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -1833,7 +1843,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aurora/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/aurora/05_operations/" class="md-nav__link">
         
   
   
@@ -1916,7 +1926,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../auto-scaling/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/auto-scaling/01_overview/" class="md-nav__link">
         
   
   
@@ -1944,7 +1954,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../auto-scaling/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/auto-scaling/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -1972,7 +1982,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../auto-scaling/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/auto-scaling/05_operations/" class="md-nav__link">
         
   
   
@@ -2055,7 +2065,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../client-vpn/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/client-vpn/01_overview/" class="md-nav__link">
         
   
   
@@ -2083,7 +2093,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../client-vpn/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/client-vpn/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -2111,7 +2121,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../client-vpn/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/client-vpn/05_operations/" class="md-nav__link">
         
   
   
@@ -2194,7 +2204,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloudfront/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/cloudfront/01_overview/" class="md-nav__link">
         
   
   
@@ -2222,7 +2232,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloudfront/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/cloudfront/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -2250,7 +2260,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloudfront/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/cloudfront/05_operations/" class="md-nav__link">
         
   
   
@@ -2333,7 +2343,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloudtrail/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/cloudtrail/01_overview/" class="md-nav__link">
         
   
   
@@ -2361,7 +2371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloudtrail/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/cloudtrail/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -2389,7 +2399,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloudtrail/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/cloudtrail/05_operations/" class="md-nav__link">
         
   
   
@@ -2472,7 +2482,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloudwatch/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/cloudwatch/01_overview/" class="md-nav__link">
         
   
   
@@ -2500,7 +2510,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloudwatch/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/cloudwatch/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -2528,7 +2538,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloudwatch/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/cloudwatch/05_operations/" class="md-nav__link">
         
   
   
@@ -2611,7 +2621,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloudwatch-logs/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/cloudwatch-logs/01_overview/" class="md-nav__link">
         
   
   
@@ -2639,7 +2649,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloudwatch-logs/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/cloudwatch-logs/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -2667,7 +2677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cloudwatch-logs/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/cloudwatch-logs/05_operations/" class="md-nav__link">
         
   
   
@@ -2750,7 +2760,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../codebuild/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/codebuild/01_overview/" class="md-nav__link">
         
   
   
@@ -2778,7 +2788,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../codebuild/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/codebuild/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -2806,7 +2816,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../codebuild/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/codebuild/05_operations/" class="md-nav__link">
         
   
   
@@ -2889,7 +2899,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../codecommit/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/codecommit/01_overview/" class="md-nav__link">
         
   
   
@@ -2917,7 +2927,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../codecommit/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/codecommit/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -2945,7 +2955,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../codecommit/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/codecommit/05_operations/" class="md-nav__link">
         
   
   
@@ -3028,7 +3038,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../codedeploy/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/codedeploy/01_overview/" class="md-nav__link">
         
   
   
@@ -3056,7 +3066,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../codedeploy/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/codedeploy/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -3084,7 +3094,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../codedeploy/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/codedeploy/05_operations/" class="md-nav__link">
         
   
   
@@ -3167,7 +3177,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../codepipeline/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/codepipeline/01_overview/" class="md-nav__link">
         
   
   
@@ -3195,7 +3205,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../codepipeline/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/codepipeline/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -3223,7 +3233,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../codepipeline/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/codepipeline/05_operations/" class="md-nav__link">
         
   
   
@@ -3306,7 +3316,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cognito/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/cognito/01_overview/" class="md-nav__link">
         
   
   
@@ -3334,7 +3344,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cognito/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/cognito/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -3362,7 +3372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cognito/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/cognito/05_operations/" class="md-nav__link">
         
   
   
@@ -3445,7 +3455,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/config/01_overview/" class="md-nav__link">
         
   
   
@@ -3473,7 +3483,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/config/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -3501,7 +3511,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/config/05_operations/" class="md-nav__link">
         
   
   
@@ -3584,7 +3594,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../control-tower/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/control-tower/01_overview/" class="md-nav__link">
         
   
   
@@ -3612,7 +3622,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../control-tower/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/control-tower/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -3640,7 +3650,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../control-tower/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/control-tower/05_operations/" class="md-nav__link">
         
   
   
@@ -3723,7 +3733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../direct-connect/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/direct-connect/01_overview/" class="md-nav__link">
         
   
   
@@ -3751,7 +3761,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../direct-connect/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/direct-connect/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -3779,7 +3789,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../direct-connect/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/direct-connect/05_operations/" class="md-nav__link">
         
   
   
@@ -3862,7 +3872,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dynamodb/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/dynamodb/01_overview/" class="md-nav__link">
         
   
   
@@ -3890,7 +3900,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dynamodb/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/dynamodb/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -3918,7 +3928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dynamodb/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/dynamodb/05_operations/" class="md-nav__link">
         
   
   
@@ -4001,7 +4011,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ebs/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/ebs/01_overview/" class="md-nav__link">
         
   
   
@@ -4029,7 +4039,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ebs/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/ebs/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -4057,7 +4067,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ebs/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/ebs/05_operations/" class="md-nav__link">
         
   
   
@@ -4140,7 +4150,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ec2/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/ec2/01_overview/" class="md-nav__link">
         
   
   
@@ -4168,7 +4178,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ec2/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/ec2/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -4196,7 +4206,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ec2/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/ec2/05_operations/" class="md-nav__link">
         
   
   
@@ -4279,7 +4289,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ecr/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/ecr/01_overview/" class="md-nav__link">
         
   
   
@@ -4307,7 +4317,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ecr/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/ecr/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -4335,7 +4345,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ecr/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/ecr/05_operations/" class="md-nav__link">
         
   
   
@@ -4418,7 +4428,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ecs/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/ecs/01_overview/" class="md-nav__link">
         
   
   
@@ -4446,7 +4456,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ecs/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/ecs/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -4474,7 +4484,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ecs/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/ecs/05_operations/" class="md-nav__link">
         
   
   
@@ -4557,7 +4567,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../efs/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/efs/01_overview/" class="md-nav__link">
         
   
   
@@ -4585,7 +4595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../efs/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/efs/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -4613,7 +4623,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../efs/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/efs/05_operations/" class="md-nav__link">
         
   
   
@@ -4696,7 +4706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elasticache/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/elasticache/01_overview/" class="md-nav__link">
         
   
   
@@ -4724,7 +4734,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elasticache/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/elasticache/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -4752,7 +4762,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elasticache/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/elasticache/05_operations/" class="md-nav__link">
         
   
   
@@ -4835,7 +4845,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elb/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/elb/01_overview/" class="md-nav__link">
         
   
   
@@ -4863,7 +4873,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elb/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/elb/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -4891,7 +4901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elb/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/elb/05_operations/" class="md-nav__link">
         
   
   
@@ -4974,7 +4984,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../eventbridge/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/eventbridge/01_overview/" class="md-nav__link">
         
   
   
@@ -5002,7 +5012,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../eventbridge/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/eventbridge/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -5030,7 +5040,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../eventbridge/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/eventbridge/05_operations/" class="md-nav__link">
         
   
   
@@ -5113,7 +5123,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../fargate/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/fargate/01_overview/" class="md-nav__link">
         
   
   
@@ -5141,7 +5151,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../fargate/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/fargate/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -5169,7 +5179,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../fargate/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/fargate/05_operations/" class="md-nav__link">
         
   
   
@@ -5252,7 +5262,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../global-accelerator/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/global-accelerator/01_overview/" class="md-nav__link">
         
   
   
@@ -5280,7 +5290,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../global-accelerator/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/global-accelerator/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -5308,7 +5318,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../global-accelerator/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/global-accelerator/05_operations/" class="md-nav__link">
         
   
   
@@ -5391,7 +5401,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../iam/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/iam/01_overview/" class="md-nav__link">
         
   
   
@@ -5419,7 +5429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../iam/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/iam/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -5447,7 +5457,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../iam/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/iam/05_operations/" class="md-nav__link">
         
   
   
@@ -5530,7 +5540,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../igw/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/igw/01_overview/" class="md-nav__link">
         
   
   
@@ -5558,7 +5568,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../igw/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/igw/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -5586,7 +5596,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../igw/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/igw/05_operations/" class="md-nav__link">
         
   
   
@@ -5669,7 +5679,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kms/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/kms/01_overview/" class="md-nav__link">
         
   
   
@@ -5697,7 +5707,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kms/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/kms/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -5725,7 +5735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kms/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/kms/05_operations/" class="md-nav__link">
         
   
   
@@ -5808,7 +5818,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../lambda/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/lambda/01_overview/" class="md-nav__link">
         
   
   
@@ -5836,7 +5846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../lambda/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/lambda/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -5864,7 +5874,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../lambda/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/lambda/05_operations/" class="md-nav__link">
         
   
   
@@ -5947,7 +5957,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nat-gateway/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/nat-gateway/01_overview/" class="md-nav__link">
         
   
   
@@ -5975,7 +5985,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nat-gateway/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/nat-gateway/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -6003,7 +6013,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nat-gateway/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/nat-gateway/05_operations/" class="md-nav__link">
         
   
   
@@ -6086,7 +6096,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../organizations/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/organizations/01_overview/" class="md-nav__link">
         
   
   
@@ -6114,7 +6124,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../organizations/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/organizations/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -6142,7 +6152,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../organizations/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/organizations/05_operations/" class="md-nav__link">
         
   
   
@@ -6225,7 +6235,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../privatelink/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/privatelink/01_overview/" class="md-nav__link">
         
   
   
@@ -6253,7 +6263,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../privatelink/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/privatelink/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -6281,7 +6291,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../privatelink/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/privatelink/05_operations/" class="md-nav__link">
         
   
   
@@ -6364,7 +6374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rds/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/rds/01_overview/" class="md-nav__link">
         
   
   
@@ -6392,7 +6402,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rds/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/rds/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -6420,7 +6430,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rds/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/rds/05_operations/" class="md-nav__link">
         
   
   
@@ -6503,7 +6513,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../route-table/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/route-table/01_overview/" class="md-nav__link">
         
   
   
@@ -6531,7 +6541,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../route-table/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/route-table/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -6559,7 +6569,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../route-table/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/route-table/05_operations/" class="md-nav__link">
         
   
   
@@ -6642,7 +6652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../route53/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/route53/01_overview/" class="md-nav__link">
         
   
   
@@ -6670,7 +6680,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../route53/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/route53/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -6698,7 +6708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../route53/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/route53/05_operations/" class="md-nav__link">
         
   
   
@@ -6731,20 +6741,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_1_39" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_1_39" >
         
           
           <label class="md-nav__link" for="__nav_2_7_1_39" id="__nav_2_7_1_39_label" tabindex="0">
@@ -6765,7 +6773,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_7_1_39_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_7_1_39_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_7_1_39">
             <span class="md-nav__icon md-icon"></span>
             
@@ -6780,37 +6788,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    S3 概要
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../XX-AWS2/services/s3/01_overview/" class="md-nav__link">
         
   
   
@@ -6826,81 +6807,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. サービスの役割
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 主なユースケース
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 他サービスとの関係
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 料金のざっくりイメージ
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. 初心者がまず覚えるべきポイント
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -6913,7 +6819,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/s3/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -6941,7 +6847,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/s3/05_operations/" class="md-nav__link">
         
   
   
@@ -7024,7 +6930,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../s3-glacier-archive/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/s3-glacier-archive/01_overview/" class="md-nav__link">
         
   
   
@@ -7052,7 +6958,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../s3-glacier-archive/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/s3-glacier-archive/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -7080,7 +6986,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../s3-glacier-archive/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/s3-glacier-archive/05_operations/" class="md-nav__link">
         
   
   
@@ -7163,7 +7069,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../secrets-manager/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/secrets-manager/01_overview/" class="md-nav__link">
         
   
   
@@ -7191,7 +7097,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../secrets-manager/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/secrets-manager/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -7219,7 +7125,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../secrets-manager/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/secrets-manager/05_operations/" class="md-nav__link">
         
   
   
@@ -7302,7 +7208,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../shield-advanced/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/shield-advanced/01_overview/" class="md-nav__link">
         
   
   
@@ -7330,7 +7236,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../shield-advanced/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/shield-advanced/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -7358,7 +7264,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../shield-advanced/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/shield-advanced/05_operations/" class="md-nav__link">
         
   
   
@@ -7441,7 +7347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../site-to-site-vpn/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/site-to-site-vpn/01_overview/" class="md-nav__link">
         
   
   
@@ -7469,7 +7375,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../site-to-site-vpn/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/site-to-site-vpn/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -7497,7 +7403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../site-to-site-vpn/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/site-to-site-vpn/05_operations/" class="md-nav__link">
         
   
   
@@ -7580,7 +7486,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sns/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/sns/01_overview/" class="md-nav__link">
         
   
   
@@ -7608,7 +7514,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sns/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/sns/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -7636,7 +7542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sns/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/sns/05_operations/" class="md-nav__link">
         
   
   
@@ -7719,7 +7625,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sqs/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/sqs/01_overview/" class="md-nav__link">
         
   
   
@@ -7747,7 +7653,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sqs/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/sqs/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -7775,7 +7681,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sqs/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/sqs/05_operations/" class="md-nav__link">
         
   
   
@@ -7858,7 +7764,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ssm/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/ssm/01_overview/" class="md-nav__link">
         
   
   
@@ -7886,7 +7792,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ssm/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/ssm/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -7914,7 +7820,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ssm/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/ssm/05_operations/" class="md-nav__link">
         
   
   
@@ -7997,7 +7903,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../step-functions/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/step-functions/01_overview/" class="md-nav__link">
         
   
   
@@ -8025,7 +7931,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../step-functions/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/step-functions/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -8053,7 +7959,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../step-functions/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/step-functions/05_operations/" class="md-nav__link">
         
   
   
@@ -8136,7 +8042,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../subnet/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/subnet/01_overview/" class="md-nav__link">
         
   
   
@@ -8164,7 +8070,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../subnet/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/subnet/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -8192,7 +8098,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../subnet/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/subnet/05_operations/" class="md-nav__link">
         
   
   
@@ -8275,7 +8181,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transit-gateway/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/transit-gateway/01_overview/" class="md-nav__link">
         
   
   
@@ -8303,7 +8209,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transit-gateway/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/transit-gateway/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -8331,7 +8237,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transit-gateway/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/transit-gateway/05_operations/" class="md-nav__link">
         
   
   
@@ -8414,7 +8320,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../trusted-advisor/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/trusted-advisor/01_overview/" class="md-nav__link">
         
   
   
@@ -8442,7 +8348,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../trusted-advisor/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/trusted-advisor/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -8470,7 +8376,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../trusted-advisor/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/trusted-advisor/05_operations/" class="md-nav__link">
         
   
   
@@ -8553,7 +8459,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../vpc/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/vpc/01_overview/" class="md-nav__link">
         
   
   
@@ -8581,7 +8487,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../vpc/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/vpc/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -8609,7 +8515,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../vpc/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/vpc/05_operations/" class="md-nav__link">
         
   
   
@@ -8692,7 +8598,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../vpc-endpoint/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/vpc-endpoint/01_overview/" class="md-nav__link">
         
   
   
@@ -8720,7 +8626,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../vpc-endpoint/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/vpc-endpoint/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -8748,7 +8654,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../vpc-endpoint/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/vpc-endpoint/05_operations/" class="md-nav__link">
         
   
   
@@ -8831,7 +8737,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../waf/01_overview/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/waf/01_overview/" class="md-nav__link">
         
   
   
@@ -8859,7 +8765,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../waf/02_managedconsole_setup/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/waf/02_managedconsole_setup/" class="md-nav__link">
         
   
   
@@ -8887,7 +8793,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../waf/05_operations/" class="md-nav__link">
+      <a href="../../../XX-AWS2/services/waf/05_operations/" class="md-nav__link">
         
   
   
@@ -8959,69 +8865,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. サービスの役割
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 主なユースケース
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 他サービスとの関係
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 料金のざっくりイメージ
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. 初心者がまず覚えるべきポイント
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -9037,12 +8880,17 @@
 
 
 
-<h1 id="s3">S3 概要</h1>
-<h2 id="1">1. サービスの役割</h2>
-<h2 id="2">2. 主なユースケース</h2>
-<h2 id="3">3. 他サービスとの関係</h2>
-<h2 id="4">4. 料金のざっくりイメージ</h2>
-<h2 id="5">5. 初心者がまず覚えるべきポイント</h2>
+<h1 id="binbash">!/bin/bash</h1>
+<p>echo "=== バックアップ開始 ==="</p>
+<h1 id="_1">バックアップ元</h1>
+<p>SOURCE="/var/www/html"</p>
+<h1 id="_2">バックアップ先</h1>
+<p>DEST="/backup/html_$(date +%Y%m%d)"</p>
+<h1 id="_3">フォルダ作成</h1>
+<p>mkdir -p "$DEST"</p>
+<h1 id="_4">コピー</h1>
+<p>cp -r "$SOURCE" "$DEST"</p>
+<p>echo "=== 完了しました ==="</p>
 
 
 
@@ -9092,10 +8940,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
     
   </body>
