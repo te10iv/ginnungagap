@@ -1,0 +1,45 @@
+# SpringBootローリングアップデートの例（CodeDeploy +SSM ）
+
+## 概要　：　ローリングデプロイ（サービス停止なし更新）
+
+Spring Bootの更新を サービス停止ゼロ でやる仕組みについて。
+
+流れ：
+ASG の EC2(1) を ALB から外す
+EC2(1) に新しい jar を入れる
+systemctl restart sample-app
+Spring Boot → /actuator/health でヘルスチェック
+回復したら ALB に戻す
+次の EC2(2) へ
+ぜんぶ終わり
+
+
+## スクリプトの例
+
+- 補足
+  - appspec.ymlの例
+  - stop.shの例
+-   start.shの例
+
+
+▪️　appspec.ymlの例
+
+version: 0.0
+os: linux
+files:
+  - source: /target/sample-app.jar
+    destination: /opt/app/sample-app/
+
+hooks:
+  BeforeInstall:
+    - location: scripts/stop.sh
+      timeout: 60
+  AfterInstall:
+    - location: scripts/start.sh
+      timeout: 60
+
+■ stop.sh の例
+systemctl stop sample-app || true
+
+■ start.sh の例
+systemctl start sample-app
