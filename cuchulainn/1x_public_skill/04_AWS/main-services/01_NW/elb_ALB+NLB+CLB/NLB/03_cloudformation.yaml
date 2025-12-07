@@ -1,2 +1,51 @@
-# Elastic Load Balancing（ALB/NLB）
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Network Load Balancerを作成し、TCP/UDPトラフィックを複数のターゲットに分散します。'
 
+Parameters:
+  VPCId:
+    Type: AWS::EC2::VPC::Id
+    Description: VPC ID
+  SubnetIds:
+    Type: List<AWS::EC2::Subnet::Id>
+    Description: Subnet IDs (at least 2 subnets in different AZs)
+
+Resources:
+  NetworkLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: my-nlb
+      Type: network
+      Scheme: internet-facing
+      Subnets: !Ref SubnetIds
+      Tags:
+        - Key: Name
+          Value: my-nlb
+
+  TargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: my-nlb-target-group
+      Port: 80
+      Protocol: TCP
+      VpcId: !Ref VPCId
+      TargetType: instance
+      HealthCheckProtocol: TCP
+      HealthCheckPort: 80
+      HealthCheckIntervalSeconds: 30
+      HealthyThresholdCount: 2
+      UnhealthyThresholdCount: 2
+
+  Listener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref TargetGroup
+      LoadBalancerArn: !Ref NetworkLoadBalancer
+      Port: 80
+      Protocol: TCP
+
+Outputs:
+  LoadBalancerDNS:
+    Description: Network Load Balancer DNS Name
+    Value: !GetAtt NetworkLoadBalancer.DNSName

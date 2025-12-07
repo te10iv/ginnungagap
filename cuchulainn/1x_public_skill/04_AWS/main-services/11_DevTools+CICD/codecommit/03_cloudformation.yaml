@@ -1,2 +1,17 @@
-# CodeCommit
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'CodeCommitリポジトリを作成し、ソースコードを管理します。'
 
+Resources:
+  CodeCommitRepository:
+    Type: AWS::CodeCommit::Repository
+    Properties:
+      RepositoryName: my-repository
+      RepositoryDescription: My source code repository
+
+Outputs:
+  RepositoryName:
+    Description: CodeCommit Repository Name
+    Value: !Ref CodeCommitRepository
+  CloneUrlHttp:
+    Description: Clone URL (HTTP)
+    Value: !GetAtt CodeCommitRepository.CloneUrlHttp

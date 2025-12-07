@@ -1,2 +1,26 @@
-# SNS
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'SNSトピックを作成し、メールアドレスをサブスクライブします。'
 
+Parameters:
+  EmailAddress:
+    Type: String
+    Description: Email address for subscription
+
+Resources:
+  SNSTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: my-notification-topic
+      DisplayName: My Notification Topic
+
+  SNSSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref SNSTopic
+      Protocol: email
+      Endpoint: !Ref EmailAddress
+
+Outputs:
+  TopicArn:
+    Description: SNS Topic ARN
+    Value: !Ref SNSTopic

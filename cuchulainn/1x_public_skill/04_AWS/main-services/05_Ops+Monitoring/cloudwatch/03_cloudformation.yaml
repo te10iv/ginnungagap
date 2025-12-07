@@ -1,2 +1,34 @@
-# CloudWatch
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'CloudWatchアラームを作成し、EC2インスタンスのCPU使用率を監視します。'
 
+Parameters:
+  InstanceId:
+    Type: String
+    Description: EC2 Instance ID
+  SNSTopicArn:
+    Type: String
+    Description: SNS Topic ARN
+
+Resources:
+  CPUAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: high-cpu-alarm
+      AlarmDescription: Alarm when CPU exceeds 80%
+      MetricName: CPUUtilization
+      Namespace: AWS/EC2
+      Statistic: Average
+      Period: 300
+      EvaluationPeriods: 2
+      Threshold: 80
+      ComparisonOperator: GreaterThanThreshold
+      Dimensions:
+        - Name: InstanceId
+          Value: !Ref InstanceId
+      AlarmActions:
+        - !Ref SNSTopicArn
+
+Outputs:
+  AlarmName:
+    Description: CloudWatch Alarm Name
+    Value: !Ref CPUAlarm

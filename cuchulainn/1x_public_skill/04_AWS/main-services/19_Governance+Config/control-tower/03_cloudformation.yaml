@@ -1,2 +1,14 @@
-# Control Tower
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'AWS Control Towerをセットアップし、マルチアカウント環境のガバナンスとコンプライアンスを自動化します（手動セットアップが必要）。'
 
+# Note: Control Tower cannot be created via CloudFormation
+# This template is a placeholder - Control Tower requires manual setup via console
+
+Resources:
+  Placeholder:
+    Type: AWS::CloudFormation::WaitConditionHandle
+
+Outputs:
+  Note:
+    Description: Control Tower requires manual setup via AWS Console
+    Value: Please use AWS Console to set up Control Tower

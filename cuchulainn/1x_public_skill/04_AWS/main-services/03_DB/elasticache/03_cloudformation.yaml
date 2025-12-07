@@ -1,2 +1,56 @@
-# ElastiCache
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'ElastiCache Redisクラスターを作成し、アプリケーションのキャッシュ層として使用します。'
 
+Parameters:
+  VPCId:
+    Type: AWS::EC2::VPC::Id
+    Description: VPC ID
+  SubnetIds:
+    Type: List<AWS::EC2::Subnet::Id>
+    Description: Subnet IDs (at least 2 subnets in different AZs)
+
+Resources:
+  SubnetGroup:
+    Type: AWS::ElastiCache::SubnetGroup
+    Properties:
+      Description: Subnet group for ElastiCache
+      SubnetIds: !Ref SubnetIds
+      CacheSubnetGroupName: my-cache-subnet-group
+
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: elasticache-sg
+      GroupDescription: Security group for ElastiCache
+      VpcId: !Ref VPCId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 6379
+          ToPort: 6379
+          CidrIp: 10.0.0.0/16
+          Description: Redis access from VPC
+      Tags:
+        - Key: Name
+          Value: elasticache-sg
+
+  RedisCluster:
+    Type: AWS::ElastiCache::ReplicationGroup
+    Properties:
+      ReplicationGroupId: my-redis-cluster
+      Description: Redis cluster for caching
+      Engine: redis
+      CacheNodeType: cache.t3.micro
+      NumCacheClusters: 1
+      CacheSubnetGroupName: !Ref SubnetGroup
+      SecurityGroupIds:
+        - !Ref SecurityGroup
+      AutomaticFailoverEnabled: false
+      MultiAZEnabled: false
+
+Outputs:
+  RedisEndpoint:
+    Description: Redis Endpoint
+    Value: !GetAtt RedisCluster.RedisEndpoint.Address
+  RedisPort:
+    Description: Redis Port
+    Value: !GetAtt RedisCluster.RedisEndpoint.Port

@@ -1,2 +1,19 @@
-# Secrets Manager
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Secrets Managerでデータベースの認証情報を保存し、アプリケーションから安全に取得できるようにします。'
 
+Resources:
+  Secret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: my-database-credentials
+      Description: Database credentials
+      SecretString: !Sub |
+        {
+          "username": "admin",
+          "password": "your-password"
+        }
+
+Outputs:
+  SecretArn:
+    Description: Secrets Manager Secret ARN
+    Value: !Ref Secret

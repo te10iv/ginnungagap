@@ -1,2 +1,20 @@
-# S3 Glacier / Archive
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'S3バケットにライフサイクルポリシーを設定し、古いオブジェクトを自動的にGlacierに移行します。'
 
+Resources:
+  ArchiveBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'my-archive-bucket-${AWS::AccountId}'
+      LifecycleConfiguration:
+        Rules:
+          - Id: glacier-archive-rule
+            Status: Enabled
+            Transitions:
+              - TransitionInDays: 30
+                StorageClass: GLACIER
+
+Outputs:
+  BucketName:
+    Description: S3 Bucket Name
+    Value: !Ref ArchiveBucket

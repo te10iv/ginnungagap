@@ -1,2 +1,39 @@
-# S3
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'S3バケットを作成し、静的ウェブサイトをホスティングできるようにします。'
 
+Resources:
+  MyWebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'my-website-bucket-${AWS::AccountId}'
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+      Tags:
+        - Key: Name
+          Value: my-website-bucket
+
+  BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref MyWebsiteBucket
+      PolicyDocument:
+        Statement:
+          - Sid: PublicReadGetObject
+            Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Sub '${MyWebsiteBucket}/*'
+
+Outputs:
+  BucketName:
+    Description: S3 Bucket Name
+    Value: !Ref MyWebsiteBucket
+  WebsiteURL:
+    Description: Website URL
+    Value: !GetAtt MyWebsiteBucket.WebsiteURL

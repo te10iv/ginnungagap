@@ -1,2 +1,14 @@
-# CloudWatch Logs
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'CloudWatch Logsのロググループを作成し、EC2インスタンスからアプリケーションログを送信します。'
 
+Resources:
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/ec2/my-app
+      RetentionInDays: 7
+
+Outputs:
+  LogGroupName:
+    Description: CloudWatch Logs Group Name
+    Value: !Ref LogGroup

@@ -1,2 +1,26 @@
-# DynamoDB
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'DynamoDBテーブルを作成し、NoSQLデータベースとして使用します。'
 
+Resources:
+  UsersTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Users
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: UserId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: UserId
+          KeyType: HASH
+      Tags:
+        - Key: Name
+          Value: Users
+
+Outputs:
+  TableName:
+    Description: DynamoDB Table Name
+    Value: !Ref UsersTable
+  TableArn:
+    Description: DynamoDB Table ARN
+    Value: !GetAtt UsersTable.Arn

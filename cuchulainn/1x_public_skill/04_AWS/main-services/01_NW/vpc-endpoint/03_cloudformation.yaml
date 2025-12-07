@@ -1,2 +1,33 @@
-# VPC Endpoint（Gateway/Interface）
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'VPC Endpoint（Gateway型）を作成し、プライベートサブネットからS3にプライベート接続できるようにします。'
 
+Parameters:
+  VPCId:
+    Type: AWS::EC2::VPC::Id
+    Description: VPC ID
+  RouteTableId:
+    Type: String
+    Description: Private Route Table ID
+
+Resources:
+  VPCEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      VpcId: !Ref VPCId
+      ServiceName: !Sub 'com.amazonaws.${AWS::Region}.s3'
+      VpcEndpointType: Gateway
+      RouteTableIds:
+        - !Ref RouteTableId
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal: '*'
+            Action:
+              - s3:GetObject
+              - s3:PutObject
+            Resource: '*'
+
+Outputs:
+  VPCEndpointId:
+    Description: VPC Endpoint ID
+    Value: !Ref VPCEndpoint

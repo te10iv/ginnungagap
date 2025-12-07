@@ -1,2 +1,21 @@
-# Athena
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'AthenaでS3のログファイルをクエリできるようにします。'
 
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'athena-query-results-${AWS::AccountId}'
+
+  AthenaDatabase:
+    Type: AWS::Glue::Database
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseInput:
+        Name: my_database
+        Description: Athena database
+
+Outputs:
+  DatabaseName:
+    Description: Athena Database Name
+    Value: !Ref AthenaDatabase

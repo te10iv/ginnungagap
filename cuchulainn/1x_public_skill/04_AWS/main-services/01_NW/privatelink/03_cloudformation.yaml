@@ -1,2 +1,23 @@
-# PrivateLink
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'VPC Endpoint Serviceを作成し、NLB経由でサービスを公開します。'
 
+Parameters:
+  NLBArn:
+    Type: String
+    Description: Network Load Balancer ARN
+
+Resources:
+  VPCEndpointService:
+    Type: AWS::EC2::VPCEndpointService
+    Properties:
+      NetworkLoadBalancerArns:
+        - !Ref NLBArn
+      AcceptanceRequired: false
+      Tags:
+        - Key: Name
+          Value: my-endpoint-service
+
+Outputs:
+  ServiceName:
+    Description: VPC Endpoint Service Name
+    Value: !GetAtt VPCEndpointService.ServiceName

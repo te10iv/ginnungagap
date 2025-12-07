@@ -1,2 +1,36 @@
-# Route 53
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Route 53でホストゾーンを作成し、ドメイン名のDNSレコードを設定します。'
 
+Parameters:
+  DomainName:
+    Type: String
+    Description: Domain name (e.g., example.com)
+  ALBTarget:
+    Type: String
+    Description: ALB DNS name or target
+
+Resources:
+  HostedZone:
+    Type: AWS::Route53::HostedZone
+    Properties:
+      Name: !Ref DomainName
+      HostedZoneConfig:
+        Comment: Hosted zone for !Ref DomainName
+
+  DNSRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZone
+      Name: !Sub 'www.${DomainName}'
+      Type: A
+      AliasTarget:
+        DNSName: !Ref ALBTarget
+        HostedZoneId: !GetAtt ALBTarget.HostedZoneId
+
+Outputs:
+  HostedZoneId:
+    Description: Hosted Zone ID
+    Value: !Ref HostedZone
+  NameServers:
+    Description: Name Servers
+    Value: !Join ',', !GetAtt HostedZone.NameServers

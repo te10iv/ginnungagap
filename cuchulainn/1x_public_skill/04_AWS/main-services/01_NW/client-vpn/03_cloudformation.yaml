@@ -1,2 +1,62 @@
-# Client VPN
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Client VPNエンドポイントを作成し、個々のクライアントデバイスからVPCに安全に接続できるようにします。'
 
+Parameters:
+  ServerCertificateArn:
+    Type: String
+    Description: ACM Server Certificate ARN
+  VPCId:
+    Type: AWS::EC2::VPC::Id
+    Description: VPC ID
+  SubnetId:
+    Type: AWS::EC2::Subnet::Id
+    Description: Subnet ID
+
+Resources:
+  ClientVPNEndpoint:
+    Type: AWS::EC2::ClientVpnEndpoint
+    Properties:
+      ClientCidrBlock: 10.0.0.0/22
+      ServerCertificateArn: !Ref ServerCertificateArn
+      AuthenticationOptions:
+        - Type: certificate-authentication
+          MutualAuthentication:
+            ClientRootCertificateChainArn: !Ref ServerCertificateArn
+      ConnectionLogOptions:
+        Enabled: true
+        CloudwatchLogGroup: !Ref CloudWatchLogGroup
+        CloudwatchLogStream: client-vpn-logs
+      DnsServers:
+        - 8.8.8.8
+      Tags:
+        - Key: Name
+          Value: my-client-vpn
+
+  CloudWatchLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/clientvpn
+      RetentionInDays: 7
+
+  ClientVPNAuthorizationRule:
+    Type: AWS::EC2::ClientVpnAuthorizationRule
+    Properties:
+      ClientVpnEndpointId: !Ref ClientVPNEndpoint
+      TargetNetworkCidr: !GetAtt VPC.CidrBlock
+      AuthorizeAllGroups: true
+
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+
+  ClientVPNNetworkAssociation:
+    Type: AWS::EC2::ClientVpnTargetNetworkAssociation
+    Properties:
+      ClientVpnEndpointId: !Ref ClientVPNEndpoint
+      SubnetId: !Ref SubnetId
+
+Outputs:
+  ClientVPNEndpointId:
+    Description: Client VPN Endpoint ID
+    Value: !Ref ClientVPNEndpoint

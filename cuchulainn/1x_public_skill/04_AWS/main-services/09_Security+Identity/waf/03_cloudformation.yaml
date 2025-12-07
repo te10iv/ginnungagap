@@ -1,2 +1,34 @@
-# WAF
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'WAF Web ACLを作成し、CloudFrontディストリビューションを保護します。'
 
+Parameters:
+  CloudFrontDistributionId:
+    Type: String
+    Description: CloudFront Distribution ID
+
+Resources:
+  WebACL:
+    Type: AWS::WAFv2::WebACL
+    Properties:
+      Name: my-web-acl
+      Scope: CLOUDFRONT
+      DefaultAction:
+        Allow: {}
+      Rules:
+        - Name: AWSManagedRulesCommonRuleSet
+          Priority: 1
+          OverrideAction:
+            None: {}
+          Statement:
+            ManagedRuleGroupStatement:
+              VendorName: AWS
+              Name: AWSManagedRulesCommonRuleSet
+          VisibilityConfig:
+            SampledRequestsEnabled: true
+            CloudWatchMetricsEnabled: true
+            MetricName: CommonRuleSetMetric
+
+Outputs:
+  WebACLArn:
+    Description: WAF Web ACL ARN
+    Value: !GetAtt WebACL.Arn

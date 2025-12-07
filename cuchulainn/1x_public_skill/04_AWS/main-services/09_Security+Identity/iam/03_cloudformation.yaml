@@ -1,2 +1,25 @@
-# IAM
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'IAMユーザーを作成し、S3への読み取り専用アクセス権限を付与します。'
 
+Resources:
+  IAMUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: s3-readonly-user
+      Policies:
+        - PolicyName: S3ReadOnlyAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:ListBucket
+                Resource:
+                  - 'arn:aws:s3:::/*'
+                  - 'arn:aws:s3:::*'
+
+Outputs:
+  UserName:
+    Description: IAM User Name
+    Value: !Ref IAMUser

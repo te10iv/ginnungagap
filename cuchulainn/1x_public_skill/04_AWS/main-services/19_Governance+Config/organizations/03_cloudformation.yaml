@@ -1,2 +1,16 @@
-# Organizations
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'AWS Organizationsを有効化し、複数のAWSアカウントを一元管理します（手動での有効化が必要な場合があります）。'
 
+# Note: Organizations cannot be fully created via CloudFormation
+# This template shows the structure but may require manual setup
+
+Resources:
+  Organization:
+    Type: AWS::Organizations::Organization
+    Properties:
+      FeatureSet: ALL
+
+Outputs:
+  OrganizationId:
+    Description: Organizations ID
+    Value: !GetAtt Organization.Id

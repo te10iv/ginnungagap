@@ -1,2 +1,31 @@
-# Direct Connect
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Direct Connect接続をリクエストします（実際の接続には通信事業者との契約が必要）。'
 
+Parameters:
+  Location:
+    Type: String
+    Description: Direct Connect Location
+  Bandwidth:
+    Type: String
+    Default: 1Gbps
+    AllowedValues:
+      - 1Gbps
+      - 10Gbps
+    Description: Connection Bandwidth
+  ConnectionName:
+    Type: String
+    Default: my-direct-connect
+    Description: Connection Name
+
+Resources:
+  DirectConnectConnection:
+    Type: AWS::DirectConnect::Connection
+    Properties:
+      Location: !Ref Location
+      Bandwidth: !Ref Bandwidth
+      ConnectionName: !Ref ConnectionName
+
+Outputs:
+  ConnectionId:
+    Description: Direct Connect Connection ID
+    Value: !Ref DirectConnectConnection

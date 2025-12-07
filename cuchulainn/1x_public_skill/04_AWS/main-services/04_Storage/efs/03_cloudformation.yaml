@@ -1,2 +1,60 @@
-# EFS
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'EFSファイルシステムを作成し、複数のEC2インスタンスから共有アクセスできるようにします。'
 
+Parameters:
+  VPCId:
+    Type: AWS::EC2::VPC::Id
+    Description: VPC ID
+  SubnetIds:
+    Type: List<AWS::EC2::Subnet::Id>
+    Description: Subnet IDs (at least 2 subnets in different AZs)
+
+Resources:
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: efs-sg
+      GroupDescription: Security group for EFS
+      VpcId: !Ref VPCId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 2049
+          ToPort: 2049
+          SourceSecurityGroupId: !Ref SecurityGroup
+          Description: NFS access
+      Tags:
+        - Key: Name
+          Value: efs-sg
+
+  EFSFileSystem:
+    Type: AWS::EFS::FileSystem
+    Properties:
+      PerformanceMode: generalPurpose
+      Encrypted: true
+      Tags:
+        - Key: Name
+          Value: my-efs
+
+  MountTarget1:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !Ref EFSFileSystem
+      SubnetId: !Select [0, !Ref SubnetIds]
+      SecurityGroups:
+        - !Ref SecurityGroup
+
+  MountTarget2:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !Ref EFSFileSystem
+      SubnetId: !Select [1, !Ref SubnetIds]
+      SecurityGroups:
+        - !Ref SecurityGroup
+
+Outputs:
+  FileSystemId:
+    Description: EFS File System ID
+    Value: !Ref EFSFileSystem
+  DNSName:
+    Description: EFS DNS Name
+    Value: !GetAtt EFSFileSystem.DNSName

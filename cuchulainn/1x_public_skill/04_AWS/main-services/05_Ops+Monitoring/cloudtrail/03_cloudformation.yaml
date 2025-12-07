@@ -1,2 +1,30 @@
-# CloudTrail
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'CloudTrailを有効化し、AWS API呼び出しの監査ログを記録します。'
 
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'cloudtrail-logs-${AWS::AccountId}'
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+  CloudTrail:
+    Type: AWS::CloudTrail::Trail
+    Properties:
+      Name: my-cloudtrail
+      S3BucketName: !Ref S3Bucket
+      IsLogging: true
+      IsMultiRegionTrail: true
+      IncludeGlobalServiceEvents: true
+      EventSelectors:
+        - ReadWriteType: All
+          IncludeManagementEvents: true
+
+Outputs:
+  TrailName:
+    Description: CloudTrail Trail Name
+    Value: !Ref CloudTrail

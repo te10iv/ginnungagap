@@ -1,2 +1,63 @@
-# NAT Gateway
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'NAT Gatewayを作成し、プライベートサブネットからインターネットへのアウトバウンド接続を可能にします。'
 
+Parameters:
+  PublicSubnetId:
+    Type: AWS::EC2::Subnet::Id
+    Description: Public Subnet ID
+  PrivateRouteTableId:
+    Type: String
+    Description: Private Route Table ID
+
+Resources:
+  NatGatewayEIP:
+    Type: AWS::EC2::EIP
+    DependsOn: InternetGatewayAttachment
+    Properties:
+      Domain: vpc
+
+  InternetGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !GetAtt PublicSubnet.VpcId
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: nat-gateway-igw
+
+  NatGateway:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt NatGatewayEIP.AllocationId
+      SubnetId: !Ref PublicSubnetId
+      Tags:
+        - Key: Name
+          Value: my-nat-gateway
+
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !GetAtt VPC.VpcId
+      AvailabilityZone: ap-northeast-1a
+      CidrBlock: 10.0.1.0/24
+
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+
+  NatRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTableId
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NatGateway
+
+Outputs:
+  NatGatewayId:
+    Description: NAT Gateway ID
+    Value: !Ref NatGateway

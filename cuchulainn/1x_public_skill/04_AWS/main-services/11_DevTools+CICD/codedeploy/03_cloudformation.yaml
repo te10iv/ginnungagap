@@ -1,2 +1,49 @@
-# CodeDeploy
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'CodeDeployアプリケーションとデプロイメントグループを作成し、EC2インスタンスにアプリケーションをデプロイします。'
 
+Parameters:
+  InstanceTagKey:
+    Type: String
+    Default: Name
+    Description: EC2 Instance Tag Key
+  InstanceTagValue:
+    Type: String
+    Default: my-instance
+    Description: EC2 Instance Tag Value
+
+Resources:
+  CodeDeployRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: codedeploy.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole
+
+  CodeDeployApplication:
+    Type: AWS::CodeDeploy::Application
+    Properties:
+      ApplicationName: my-app
+      ComputePlatform: Server
+
+  CodeDeployDeploymentGroup:
+    Type: AWS::CodeDeploy::DeploymentGroup
+    Properties:
+      ApplicationName: !Ref CodeDeployApplication
+      DeploymentGroupName: my-deployment-group
+      ServiceRoleArn: !GetAtt CodeDeployRole.Arn
+      DeploymentConfigName: CodeDeployDefault.AllAtOnce
+      Ec2TagFilters:
+        - Type: KEY_AND_VALUE
+          Key: !Ref InstanceTagKey
+          Value: !Ref InstanceTagValue
+
+Outputs:
+  ApplicationName:
+    Description: CodeDeploy Application Name
+    Value: !Ref CodeDeployApplication

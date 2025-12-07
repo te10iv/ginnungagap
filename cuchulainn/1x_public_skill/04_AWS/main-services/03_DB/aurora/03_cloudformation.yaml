@@ -1,2 +1,79 @@
-# Aurora
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Aurora MySQLクラスターを作成し、高性能なデータベース環境を構築します。'
 
+Parameters:
+  VPCId:
+    Type: AWS::EC2::VPC::Id
+    Description: VPC ID
+  SubnetIds:
+    Type: List<AWS::EC2::Subnet::Id>
+    Description: Subnet IDs (at least 2 subnets in different AZs)
+  MasterUsername:
+    Type: String
+    Default: admin
+    Description: Master username
+  MasterUserPassword:
+    Type: String
+    NoEcho: true
+    Description: Master user password
+
+Resources:
+  DBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupName: aurora-subnet-group
+      DBSubnetGroupDescription: Subnet group for Aurora
+      SubnetIds: !Ref SubnetIds
+      Tags:
+        - Key: Name
+          Value: aurora-subnet-group
+
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: aurora-sg
+      GroupDescription: Security group for Aurora
+      VpcId: !Ref VPCId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: 10.0.0.0/16
+          Description: MySQL access from VPC
+      Tags:
+        - Key: Name
+          Value: aurora-sg
+
+  AuroraCluster:
+    Type: AWS::RDS::DBCluster
+    Properties:
+      DBClusterIdentifier: my-aurora-cluster
+      Engine: aurora-mysql
+      EngineVersion: '8.0.mysql_aurora.3.04.0'
+      MasterUsername: !Ref MasterUsername
+      MasterUserPassword: !Ref MasterUserPassword
+      DatabaseName: mydb
+      DBSubnetGroupName: !Ref DBSubnetGroup
+      VpcSecurityGroupIds:
+        - !Ref SecurityGroup
+      BackupRetentionPeriod: 7
+      Tags:
+        - Key: Name
+          Value: my-aurora-cluster
+
+  AuroraInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: my-aurora-instance
+      DBInstanceClass: db.t3.medium
+      Engine: aurora-mysql
+      DBClusterIdentifier: !Ref AuroraCluster
+      PubliclyAccessible: false
+
+Outputs:
+  ClusterEndpoint:
+    Description: Aurora Cluster Endpoint
+    Value: !GetAtt AuroraCluster.Endpoint.Address
+  ReaderEndpoint:
+    Description: Aurora Reader Endpoint
+    Value: !GetAtt AuroraCluster.ReadEndpoint.Address

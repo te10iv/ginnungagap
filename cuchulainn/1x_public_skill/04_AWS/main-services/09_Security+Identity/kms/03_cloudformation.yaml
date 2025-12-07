@@ -1,2 +1,46 @@
-# KMS
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'KMSカスタマーマネージドキー（CMK）を作成し、S3バケットの暗号化に使用します。'
 
+Resources:
+  KMSKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: Encryption key for S3
+      KeyPolicy:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: Enable IAM User Permissions
+            Effect: Allow
+            Principal:
+              AWS: !Sub 'arn:aws:iam::${AWS::AccountId}:root'
+            Action: 'kms:*'
+            Resource: '*'
+          - Sid: Allow use of the key
+            Effect: Allow
+            Principal:
+              AWS: !Sub 'arn:aws:iam::${AWS::AccountId}:root'
+            Action:
+              - kms:Encrypt
+              - kms:Decrypt
+              - kms:ReEncrypt*
+              - kms:GenerateDataKey*
+              - kms:DescribeKey
+            Resource: '*'
+      EnableKeyRotation: true
+      Tags:
+        - Key: Name
+          Value: my-encryption-key
+
+  KMSAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: alias/my-encryption-key
+      TargetKeyId: !Ref KMSKey
+
+Outputs:
+  KeyId:
+    Description: KMS Key ID
+    Value: !Ref KMSKey
+  KeyArn:
+    Description: KMS Key ARN
+    Value: !GetAtt KMSKey.Arn

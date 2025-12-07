@@ -1,2 +1,14 @@
-# Trusted Advisor
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Trusted Advisorを確認し、AWS環境のベストプラクティスに基づく推奨事項を確認します（手動での確認が必要）。'
 
+# Note: Trusted Advisor cannot be configured via CloudFormation
+# This template is a placeholder - Trusted Advisor is automatically available
+
+Resources:
+  Placeholder:
+    Type: AWS::CloudFormation::WaitConditionHandle
+
+Outputs:
+  Note:
+    Description: Trusted Advisor is automatically available in AWS Console
+    Value: Please check Trusted Advisor recommendations in AWS Console

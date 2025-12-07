@@ -1,2 +1,29 @@
-# Systems Manager（SSM）
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'SSM Session Managerを設定し、EC2インスタンスにSSH接続なしでアクセスできるようにします。'
 
+Resources:
+  SSMInstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: SSMInstanceRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+
+  InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      InstanceProfileName: SSMInstanceProfile
+      Roles:
+        - !Ref SSMInstanceRole
+
+Outputs:
+  InstanceProfileName:
+    Description: IAM Instance Profile Name
+    Value: !Ref InstanceProfile

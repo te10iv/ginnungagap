@@ -1,2 +1,32 @@
-# EventBridge
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'EventBridgeルールを作成し、スケジュール実行でLambda関数を定期的に実行します。'
 
+Parameters:
+  LambdaFunctionArn:
+    Type: String
+    Description: Lambda Function ARN
+
+Resources:
+  EventBridgeRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: my-scheduled-rule
+      Description: Scheduled rule to invoke Lambda
+      ScheduleExpression: rate(5 minutes)
+      State: ENABLED
+      Targets:
+        - Arn: !Ref LambdaFunctionArn
+          Id: TargetFunctionV1
+
+  LambdaPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref LambdaFunctionArn
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt EventBridgeRule.Arn
+
+Outputs:
+  RuleName:
+    Description: EventBridge Rule Name
+    Value: !Ref EventBridgeRule

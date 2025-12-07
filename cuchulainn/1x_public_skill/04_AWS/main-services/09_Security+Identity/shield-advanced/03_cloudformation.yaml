@@ -1,2 +1,20 @@
-# Shield Advanced
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Shield Advancedを有効化し、リソースを保護します（有料サービス、年間契約が必要）。'
 
+# Note: Shield Advanced subscription cannot be created via CloudFormation
+# This template shows the structure but requires manual subscription activation
+
+Resources:
+  ShieldProtection:
+    Type: AWS::Shield::Protection
+    Properties:
+      Name: my-shield-protection
+      ResourceArn: !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/*'
+      Tags:
+        - Key: Name
+          Value: my-shield-protection
+
+Outputs:
+  ProtectionId:
+    Description: Shield Protection ID
+    Value: !Ref ShieldProtection

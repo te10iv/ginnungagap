@@ -1,2 +1,45 @@
-# Global Accelerator
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Global Acceleratorを作成し、複数リージョンのエンドポイントにグローバルにアクセスできるようにします。'
 
+Parameters:
+  ALBArn:
+    Type: String
+    Description: Application Load Balancer ARN
+
+Resources:
+  GlobalAccelerator:
+    Type: AWS::GlobalAccelerator::Accelerator
+    Properties:
+      Name: my-accelerator
+      IpAddressType: IPV4
+      Enabled: true
+      Tags:
+        - Key: Name
+          Value: my-accelerator
+
+  Listener:
+    Type: AWS::GlobalAccelerator::Listener
+    Properties:
+      AcceleratorArn: !Ref GlobalAccelerator
+      Protocol: TCP
+      PortRanges:
+        - FromPort: 80
+          ToPort: 80
+
+  EndpointGroup:
+    Type: AWS::GlobalAccelerator::EndpointGroup
+    Properties:
+      ListenerArn: !Ref Listener
+      EndpointConfigurations:
+        - EndpointId: !Ref ALBArn
+          Weight: 100
+      HealthCheckProtocol: TCP
+      HealthCheckPort: 80
+      HealthCheckIntervalSeconds: 30
+      HealthCheckPath: /
+      ThresholdCount: 3
+
+Outputs:
+  AcceleratorDNSName:
+    Description: Global Accelerator DNS Name
+    Value: !GetAtt GlobalAccelerator.DnsName

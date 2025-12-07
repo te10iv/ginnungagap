@@ -1,2 +1,61 @@
-# Site-to-Site VPN
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Site-to-Site VPN接続を作成し、オンプレミス環境とVPC間をVPNで接続します。'
 
+Parameters:
+  VPCId:
+    Type: AWS::EC2::VPC::Id
+    Description: VPC ID
+  CustomerGatewayIP:
+    Type: String
+    Description: Customer Gateway Public IP Address
+  StaticRoutes:
+    Type: CommaDelimitedList
+    Default: '10.0.0.0/16'
+    Description: Static Routes (comma-delimited)
+
+Resources:
+  VirtualPrivateGateway:
+    Type: AWS::EC2::VPNGateway
+    Properties:
+      Type: ipsec.1
+      Tags:
+        - Key: Name
+          Value: my-vpg
+
+  VPCGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref VPCId
+      VpnGatewayId: !Ref VirtualPrivateGateway
+
+  CustomerGateway:
+    Type: AWS::EC2::CustomerGateway
+    Properties:
+      Type: ipsec.1
+      BgpAsn: 65000
+      IpAddress: !Ref CustomerGatewayIP
+      Tags:
+        - Key: Name
+          Value: my-cgw
+
+  VPNConnection:
+    Type: AWS::EC2::VPNConnection
+    Properties:
+      Type: ipsec.1
+      VpnGatewayId: !Ref VirtualPrivateGateway
+      CustomerGatewayId: !Ref CustomerGateway
+      StaticRoutesOnly: true
+      Tags:
+        - Key: Name
+          Value: my-vpn-connection
+
+  VPNConnectionRoute:
+    Type: AWS::EC2::VPNConnectionRoute
+    Properties:
+      DestinationCidrBlock: !Select [0, !Ref StaticRoutes]
+      VpnConnectionId: !Ref VPNConnection
+
+Outputs:
+  VPNConnectionId:
+    Description: VPN Connection ID
+    Value: !Ref VPNConnection
