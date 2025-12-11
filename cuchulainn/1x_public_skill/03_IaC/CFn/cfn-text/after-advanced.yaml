@@ -1,0 +1,402 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'After: Advanced CloudFormation Template with Functions and Best Practices'
+
+# ==========================================
+# ✅ 改善点:
+# 1. Parameters で柔軟性確保
+# 2. Mappings で環境別設定
+# 3. Conditions で条件分岐
+# 4. 組み込み関数で重複排除
+# 5. Outputs で再利用可能
+# 6. 疑似パラメータで自動化
+# ==========================================
+
+# ==========================================
+# Parameters - 入力値定義
+# ==========================================
+Parameters:
+  ProjectName:
+    Type: String
+    Default: myapp
+    Description: Project name for resource naming
+  
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues: [dev, stg, prod]
+    Description: Environment name
+  
+  DBPassword:
+    Type: String
+    NoEcho: true
+    MinLength: 8
+    Description: Database password (masked input)
+  
+  CreateReadReplica:
+    Type: String
+    Default: 'false'
+    AllowedValues: ['true', 'false']
+    Description: Create RDS Read Replica (true for production)
+
+# ==========================================
+# Mappings - 環境別設定マップ
+# ==========================================
+Mappings:
+  EnvironmentConfig:
+    dev:
+      InstanceType: t3.small
+      DBInstanceClass: db.t3.small
+      MultiAZ: false
+    stg:
+      InstanceType: t3.medium
+      DBInstanceClass: db.t3.medium
+      MultiAZ: false
+    prod:
+      InstanceType: m5.large
+      DBInstanceClass: db.r6i.large
+      MultiAZ: true
+
+# ==========================================
+# Conditions - 条件定義
+# ==========================================
+Conditions:
+  IsProduction: !Equals [!Ref Environment, prod]
+  ShouldCreateReadReplica: !Equals [!Ref CreateReadReplica, 'true']
+
+# ==========================================
+# Resources
+# ==========================================
+Resources:
+  # ==========================================
+  # VPC
+  # ==========================================
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-vpc'    # ✅ 動的生成
+        - Key: Environment
+          Value: !Ref Environment
+        - Key: Project
+          Value: !Ref ProjectName
+
+  # ==========================================
+  # Internet Gateway
+  # ==========================================
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-igw'
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref VPC                                       # ✅ Ref で参照
+      InternetGatewayId: !Ref InternetGateway               # ✅ Ref で参照
+
+  # ==========================================
+  # Public Subnets
+  # ==========================================
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC                                       # ✅ 重複排除
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone: !Select [0, !GetAZs '']            # ✅ AZ自動取得
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-public-${AWS::Region}a'  # ✅ 疑似パラメータ
+        - Key: Environment
+          Value: !Ref Environment
+
+  PublicSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.2.0/24
+      AvailabilityZone: !Select [1, !GetAZs '']            # ✅ 2番目のAZ
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-public-${AWS::Region}c'
+
+  # ==========================================
+  # Private Subnets
+  # ==========================================
+  PrivateSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.11.0/24
+      AvailabilityZone: !Select [0, !GetAZs '']
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-private-${AWS::Region}a'
+
+  PrivateSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.12.0/24
+      AvailabilityZone: !Select [1, !GetAZs '']
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-private-${AWS::Region}c'
+
+  # ==========================================
+  # Route Table
+  # ==========================================
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-public-rt'
+
+  PublicRoute:
+    Type: AWS::EC2::Route
+    DependsOn: AttachGateway                                # ✅ 依存関係明示
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+
+  SubnetRouteTableAssociation1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnet1                          # ✅ Ref で参照
+      RouteTableId: !Ref PublicRouteTable
+
+  SubnetRouteTableAssociation2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnet2
+      RouteTableId: !Ref PublicRouteTable
+
+  # ==========================================
+  # Security Groups
+  # ==========================================
+  WebSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Web server security group
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-web-sg'
+
+  DBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Database security group
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          SourceSecurityGroupId: !Ref WebSecurityGroup      # ✅ SG参照
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-db-sg'
+
+  # ==========================================
+  # EC2 Instances
+  # ==========================================
+  WebServer1:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Sub '{{resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2}}'  # ✅ 最新AMI自動取得
+      InstanceType: !FindInMap [EnvironmentConfig, !Ref Environment, InstanceType]  # ✅ Mappings参照
+      SubnetId: !Ref PublicSubnet1
+      SecurityGroupIds:
+        - !Ref WebSecurityGroup
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          yum update -y
+          yum install -y httpd
+          systemctl start httpd
+          systemctl enable httpd
+          
+          # ✅ 動的値展開
+          cat > /var/www/html/index.html <<EOF
+          <html>
+          <head><title>${ProjectName}</title></head>
+          <body>
+            <h1>Web Server 1</h1>
+            <p>Project: ${ProjectName}</p>
+            <p>Environment: ${Environment}</p>
+            <p>Region: ${AWS::Region}</p>
+            <p>Account: ${AWS::AccountId}</p>
+            <p>Stack: ${AWS::StackName}</p>
+          </body>
+          </html>
+          EOF
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-web-1'
+        - Key: Environment
+          Value: !Ref Environment
+
+  WebServer2:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Sub '{{resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2}}'
+      InstanceType: !FindInMap [EnvironmentConfig, !Ref Environment, InstanceType]
+      SubnetId: !Ref PublicSubnet2
+      SecurityGroupIds:
+        - !Ref WebSecurityGroup
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          yum update -y
+          yum install -y httpd
+          systemctl start httpd
+          systemctl enable httpd
+          
+          cat > /var/www/html/index.html <<EOF
+          <html>
+          <head><title>${ProjectName}</title></head>
+          <body>
+            <h1>Web Server 2</h1>
+            <p>Project: ${ProjectName}</p>
+            <p>Environment: ${Environment}</p>
+            <p>Region: ${AWS::Region}</p>
+          </body>
+          </html>
+          EOF
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-web-2'
+        - Key: Environment
+          Value: !Ref Environment
+
+  # ==========================================
+  # RDS
+  # ==========================================
+  DBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: DB subnet group
+      SubnetIds:
+        - !Ref PrivateSubnet1                               # ✅ Ref で参照
+        - !Ref PrivateSubnet2
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-db-subnet-group'
+
+  PrimaryDatabase:
+    Type: AWS::RDS::DBInstance
+    DeletionPolicy: Snapshot                                # ✅ 削除時スナップショット
+    Properties:
+      DBInstanceIdentifier: !Sub '${ProjectName}-${Environment}-db-primary'
+      Engine: mysql
+      EngineVersion: '8.0.35'
+      DBInstanceClass: !FindInMap [EnvironmentConfig, !Ref Environment, DBInstanceClass]  # ✅ 環境別
+      AllocatedStorage: 50
+      StorageType: gp3
+      StorageEncrypted: true
+      DBName: appdb
+      MasterUsername: admin
+      MasterUserPassword: !Ref DBPassword                   # ✅ パラメータ参照（暗号化）
+      VPCSecurityGroups:
+        - !Ref DBSecurityGroup
+      DBSubnetGroupName: !Ref DBSubnetGroup
+      MultiAZ: !FindInMap [EnvironmentConfig, !Ref Environment, MultiAZ]  # ✅ 環境別
+      BackupRetentionPeriod: !If [IsProduction, 30, 7]     # ✅ 条件分岐
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-db-primary'
+        - Key: Environment
+          Value: !Ref Environment
+
+  ReadReplica:
+    Type: AWS::RDS::DBInstance
+    Condition: ShouldCreateReadReplica                      # ✅ 条件付き作成
+    Properties:
+      SourceDBInstanceIdentifier: !Ref PrimaryDatabase      # ✅ Primary参照
+      DBInstanceClass: !FindInMap [EnvironmentConfig, !Ref Environment, DBInstanceClass]
+      PubliclyAccessible: false
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-db-replica'
+        - Key: Environment
+          Value: !Ref Environment
+
+# ==========================================
+# Outputs - 他スタックで再利用可能
+# ==========================================
+Outputs:
+  VpcId:
+    Description: VPC ID
+    Value: !Ref VPC
+    Export:
+      Name: !Sub '${AWS::StackName}-VPC'                    # ✅ Export で公開
+
+  PublicSubnetIds:
+    Description: Public Subnet IDs (comma-separated)
+    Value: !Join [',', [!Ref PublicSubnet1, !Ref PublicSubnet2]]  # ✅ Join で結合
+    Export:
+      Name: !Sub '${AWS::StackName}-PublicSubnets'
+
+  PrivateSubnetIds:
+    Description: Private Subnet IDs (comma-separated)
+    Value: !Join [',', [!Ref PrivateSubnet1, !Ref PrivateSubnet2]]
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnets'
+
+  WebSecurityGroupId:
+    Description: Web Security Group ID
+    Value: !Ref WebSecurityGroup
+    Export:
+      Name: !Sub '${AWS::StackName}-WebSG'
+
+  DBSecurityGroupId:
+    Description: DB Security Group ID
+    Value: !Ref DBSecurityGroup
+    Export:
+      Name: !Sub '${AWS::StackName}-DBSG'
+
+  WebServer1PublicIP:
+    Description: Web Server 1 Public IP
+    Value: !GetAtt WebServer1.PublicIp                      # ✅ GetAtt で属性取得
+
+  WebServer2PublicIP:
+    Description: Web Server 2 Public IP
+    Value: !GetAtt WebServer2.PublicIp
+
+  PrimaryDatabaseEndpoint:
+    Description: Primary Database Endpoint
+    Value: !GetAtt PrimaryDatabase.Endpoint.Address
+    Export:
+      Name: !Sub '${AWS::StackName}-DBEndpoint'
+
+  ReadReplicaEndpoint:
+    Condition: ShouldCreateReadReplica                      # ✅ 条件付き出力
+    Description: Read Replica Endpoint
+    Value: !GetAtt ReadReplica.Endpoint.Address
+
+  StackRegion:
+    Description: Stack Region
+    Value: !Ref 'AWS::Region'                               # ✅ 疑似パラメータ
+
+  StackId:
+    Description: Stack ID
+    Value: !Ref 'AWS::StackId'

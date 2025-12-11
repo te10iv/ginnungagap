@@ -8,6 +8,48 @@
 
 VPC + EC2 + RDS の構成
 
+### 構成図
+
+```mermaid
+graph TB
+    subgraph Internet["インターネット"]
+        Users[ユーザー]
+    end
+
+    subgraph AWS["AWS Cloud - VPC 10.0.0.0/16"]
+        IGW[Internet Gateway]
+        
+        subgraph PublicSubnet["Public Subnet<br/>10.0.1.0/24"]
+            WebServer[EC2 Instance<br/>Apache HTTP Server]
+        end
+        
+        subgraph PrivateSubnet["Private Subnet<br/>10.0.11.0/24"]
+            RDS[(RDS MySQL<br/>appdb)]
+        end
+        
+        WebSG[Web Security Group<br/>Port 80, 443]
+        DBSG[DB Security Group<br/>Port 3306]
+    end
+
+    Users -->|HTTP/HTTPS| IGW
+    IGW --> WebServer
+    WebServer -.->|SG| WebSG
+    WebServer -->|MySQL| RDS
+    RDS -.->|SG| DBSG
+    WebSG -.->|許可| DBSG
+
+    classDef awsBlue fill:#3b48cc,stroke:#232f3e,color:#fff
+    classDef awsOrange fill:#ff9900,stroke:#232f3e,color:#fff
+    classDef awsPurple fill:#8c4fff,stroke:#232f3e,color:#fff
+    classDef awsGreen fill:#3f8624,stroke:#232f3e,color:#fff
+    
+    class WebServer awsOrange
+    class RDS awsPurple
+    class IGW awsGreen
+```
+
+### テンプレート
+
 ```yaml
 AWSTemplateFormatVersion: '2010-09-09'
 Description: '3-Tier Architecture: VPC + EC2 + RDS'
@@ -216,6 +258,65 @@ Outputs:
 
 ## 📦 Sample 2: ALB + Auto Scaling
 
+スケーラブルなWebアプリケーション構成
+
+### 構成図
+
+```mermaid
+graph TB
+    subgraph Internet["インターネット"]
+        Users[ユーザー]
+    end
+
+    subgraph AWS["AWS Cloud - VPC"]
+        subgraph PublicSubnets["Public Subnets"]
+            ALB[Application Load<br/>Balancer]
+        end
+        
+        subgraph PrivateSubnets["Private Subnets"]
+            ASG[Auto Scaling Group<br/>Min: 1, Max: 4]
+            EC2_1[EC2 Instance 1]
+            EC2_2[EC2 Instance 2]
+            EC2_N[EC2 Instance N]
+        end
+        
+        TG[Target Group<br/>Health Check: /health.html]
+        LT[Launch Template<br/>t3.small + Apache]
+        SP[Scaling Policy<br/>Target: CPU 70%]
+        
+        ALBSG[ALB Security Group<br/>Port 80]
+        WebSG[Web Security Group<br/>Port 80 from ALB]
+    end
+
+    Users -->|HTTP| ALB
+    ALB -->|Port 80| TG
+    TG --> EC2_1
+    TG --> EC2_2
+    TG --> EC2_N
+    
+    ASG -.->|起動| LT
+    ASG --> EC2_1
+    ASG --> EC2_2
+    ASG --> EC2_N
+    SP -.->|スケール| ASG
+    
+    ALB -.->|SG| ALBSG
+    EC2_1 -.->|SG| WebSG
+    EC2_2 -.->|SG| WebSG
+    EC2_N -.->|SG| WebSG
+
+    classDef awsBlue fill:#3b48cc,stroke:#232f3e,color:#fff
+    classDef awsOrange fill:#ff9900,stroke:#232f3e,color:#fff
+    classDef awsPink fill:#d9208c,stroke:#232f3e,color:#fff
+    classDef awsGreen fill:#3f8624,stroke:#232f3e,color:#fff
+    
+    class ALB,TG awsPink
+    class EC2_1,EC2_2,EC2_N awsOrange
+    class ASG,SP awsGreen
+```
+
+### テンプレート
+
 ```yaml
 AWSTemplateFormatVersion: '2010-09-09'
 Description: 'ALB + Auto Scaling Group'
@@ -344,6 +445,41 @@ Outputs:
 
 ## 📦 Sample 3: Lambda + API Gateway
 
+サーバーレスAPI構成
+
+### 構成図
+
+```mermaid
+graph LR
+    subgraph Internet["インターネット"]
+        Users[ユーザー]
+    end
+
+    subgraph AWS["AWS Cloud - サーバーレス"]
+        APIGW[API Gateway<br/>GET /hello]
+        Lambda[Lambda Function<br/>Python 3.11<br/>Hello World]
+        CWLogs[CloudWatch Logs]
+        IAM[IAM Role<br/>Lambda Execution]
+    end
+
+    Users -->|HTTPS GET| APIGW
+    APIGW -->|トリガー| Lambda
+    Lambda -->|実行| IAM
+    Lambda -.->|ログ出力| CWLogs
+
+    classDef awsBlue fill:#3b48cc,stroke:#232f3e,color:#fff
+    classDef awsOrange fill:#ff9900,stroke:#232f3e,color:#fff
+    classDef awsRed fill:#dd344c,stroke:#232f3e,color:#fff
+    classDef awsPurple fill:#8c4fff,stroke:#232f3e,color:#fff
+    
+    class APIGW awsPurple
+    class Lambda awsOrange
+    class CWLogs awsRed
+    class IAM awsRed
+```
+
+### テンプレート
+
 ```yaml
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
@@ -385,6 +521,45 @@ Outputs:
 ---
 
 ## 📦 Sample 4: S3 + CloudFront
+
+静的Webサイトホスティング構成
+
+### 構成図
+
+```mermaid
+graph TB
+    subgraph Internet["インターネット"]
+        Users[ユーザー]
+    end
+
+    subgraph AWS["AWS Cloud"]
+        subgraph Edge["エッジロケーション（グローバル）"]
+            CF[CloudFront<br/>Distribution]
+            OAC[Origin Access<br/>Control]
+        end
+        
+        subgraph Storage["ap-northeast-1"]
+            S3[S3 Bucket<br/>静的コンテンツ<br/>index.html]
+            Policy[Bucket Policy<br/>CloudFrontのみ許可]
+        end
+    end
+
+    Users -->|HTTPS<br/>グローバル高速配信| CF
+    CF -->|OAC認証| OAC
+    OAC -->|GetObject| S3
+    Policy -.->|制御| S3
+
+    classDef awsBlue fill:#3b48cc,stroke:#232f3e,color:#fff
+    classDef awsOrange fill:#ff9900,stroke:#232f3e,color:#fff
+    classDef awsGreen fill:#3f8624,stroke:#232f3e,color:#fff
+    classDef awsPurple fill:#8c4fff,stroke:#232f3e,color:#fff
+    
+    class CF awsPurple
+    class S3 awsGreen
+    class OAC awsOrange
+```
+
+### テンプレート
 
 ```yaml
 AWSTemplateFormatVersion: '2010-09-09'
@@ -458,6 +633,48 @@ Outputs:
 ---
 
 ## 📦 Sample 5: EventBridge + Lambda（自動化）
+
+EC2自動停止の構成
+
+### 構成図
+
+```mermaid
+graph TB
+    subgraph AWS["AWS Cloud"]
+        subgraph Automation["自動化レイヤー"]
+            EB[EventBridge Rule<br/>cron(0 10 * * ? *)<br/>毎日19時JST]
+            Lambda[Lambda Function<br/>EC2停止処理<br/>Python 3.11]
+            IAM[IAM Role<br/>EC2操作権限]
+        end
+        
+        subgraph Compute["コンピュートレイヤー"]
+            EC2_1[EC2 Instance 1<br/>Tag: AutoStop=enabled]
+            EC2_2[EC2 Instance 2<br/>Tag: AutoStop=enabled]
+            EC2_N[EC2 Instance N<br/>Tag: AutoStop=enabled]
+        end
+        
+        CWLogs[CloudWatch Logs]
+    end
+
+    EB -->|19時にトリガー| Lambda
+    Lambda -->|実行権限| IAM
+    Lambda -->|DescribeInstances<br/>StopInstances| EC2_1
+    Lambda -->|DescribeInstances<br/>StopInstances| EC2_2
+    Lambda -->|DescribeInstances<br/>StopInstances| EC2_N
+    Lambda -.->|ログ出力| CWLogs
+
+    classDef awsBlue fill:#3b48cc,stroke:#232f3e,color:#fff
+    classDef awsOrange fill:#ff9900,stroke:#232f3e,color:#fff
+    classDef awsRed fill:#dd344c,stroke:#232f3e,color:#fff
+    classDef awsPurple fill:#8c4fff,stroke:#232f3e,color:#fff
+    
+    class EB awsPurple
+    class Lambda awsOrange
+    class EC2_1,EC2_2,EC2_N awsOrange
+    class IAM,CWLogs awsRed
+```
+
+### テンプレート
 
 ```yaml
 AWSTemplateFormatVersion: '2010-09-09'
@@ -558,6 +775,69 @@ Outputs:
 
 ## 📦 Sample 6: マルチAZ RDS with Read Replica
 
+高可用性データベース構成
+
+### 構成図
+
+```mermaid
+graph TB
+    subgraph AWS["AWS Cloud - VPC"]
+        subgraph AZ1["Availability Zone 1"]
+            subgraph PrivateSubnet1["Private Subnet 1"]
+                Primary[RDS Primary<br/>MySQL 8.0<br/>db.r6i.large]
+            end
+        end
+        
+        subgraph AZ2["Availability Zone 2"]
+            subgraph PrivateSubnet2["Private Subnet 2"]
+                Standby[RDS Standby<br/>MySQL 8.0<br/>自動フェイルオーバー]
+            end
+        end
+        
+        subgraph AZ3["Availability Zone 3"]
+            subgraph PrivateSubnet3["Private Subnet 3"]
+                Replica[Read Replica<br/>MySQL 8.0<br/>db.r6i.large<br/>読み取り専用]
+            end
+        end
+        
+        KMS[KMS Key<br/>暗号化]
+        DBSG[DB Security Group]
+        SubnetGroup[DB Subnet Group]
+        CWLogs[CloudWatch Logs<br/>error/slowquery]
+        PI[Performance<br/>Insights]
+    end
+    
+    subgraph App["アプリケーション層"]
+        AppWrite[書き込み処理]
+        AppRead[読み取り処理]
+    end
+
+    Primary -.->|同期レプリケーション| Standby
+    Primary -->|非同期レプリケーション| Replica
+    Primary -.->|暗号化| KMS
+    Primary -.->|SG| DBSG
+    Primary -.->|配置| SubnetGroup
+    Primary -.->|ログ| CWLogs
+    Primary -.->|監視| PI
+    
+    AppWrite -->|Write| Primary
+    AppRead -->|Read| Replica
+    
+    Standby -.->|フェイルオーバー時<br/>Primaryに昇格| Primary
+
+    classDef awsBlue fill:#3b48cc,stroke:#232f3e,color:#fff
+    classDef awsOrange fill:#ff9900,stroke:#232f3e,color:#fff
+    classDef awsRed fill:#dd344c,stroke:#232f3e,color:#fff
+    classDef awsPurple fill:#8c4fff,stroke:#232f3e,color:#fff
+    classDef awsGreen fill:#3f8624,stroke:#232f3e,color:#fff
+    
+    class Primary,Standby,Replica awsPurple
+    class KMS awsRed
+    class CWLogs,PI awsRed
+```
+
+### テンプレート
+
 ```yaml
 AWSTemplateFormatVersion: '2010-09-09'
 Description: 'Multi-AZ RDS with Read Replica'
@@ -650,6 +930,58 @@ Outputs:
 ---
 
 ## 📦 Sample 7: DynamoDB + Lambda Trigger
+
+イベント駆動型データ処理構成
+
+### 構成図
+
+```mermaid
+graph LR
+    subgraph App["アプリケーション"]
+        Client[クライアント<br/>アプリ]
+    end
+
+    subgraph AWS["AWS Cloud"]
+        subgraph DataLayer["データレイヤー"]
+            DDB[(DynamoDB Table<br/>users<br/>PAY_PER_REQUEST)]
+            Stream[DynamoDB Stream<br/>NEW_AND_OLD_IMAGES]
+            PITR[Point-in-Time<br/>Recovery]
+            SSE[暗号化<br/>SSE]
+        end
+        
+        subgraph ProcessingLayer["処理レイヤー"]
+            Lambda[Lambda Function<br/>Stream Processor<br/>Python 3.11]
+            ESM[Event Source<br/>Mapping]
+            IAM[IAM Role<br/>Stream Read権限]
+        end
+        
+        subgraph Monitoring["監視レイヤー"]
+            CWLogs[CloudWatch Logs]
+        end
+    end
+
+    Client -->|PutItem<br/>UpdateItem<br/>DeleteItem| DDB
+    DDB -->|ストリーム| Stream
+    Stream -->|トリガー| ESM
+    ESM -->|起動| Lambda
+    Lambda -->|実行権限| IAM
+    Lambda -.->|ログ出力| CWLogs
+    
+    DDB -.->|バックアップ| PITR
+    DDB -.->|保護| SSE
+
+    classDef awsBlue fill:#3b48cc,stroke:#232f3e,color:#fff
+    classDef awsOrange fill:#ff9900,stroke:#232f3e,color:#fff
+    classDef awsRed fill:#dd344c,stroke:#232f3e,color:#fff
+    classDef awsPurple fill:#8c4fff,stroke:#232f3e,color:#fff
+    
+    class DDB awsPurple
+    class Lambda awsOrange
+    class Stream,ESM awsBlue
+    class IAM,CWLogs awsRed
+```
+
+### テンプレート
 
 ```yaml
 AWSTemplateFormatVersion: '2010-09-09'
