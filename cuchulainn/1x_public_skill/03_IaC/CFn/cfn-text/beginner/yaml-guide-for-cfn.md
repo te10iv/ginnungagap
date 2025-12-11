@@ -20,7 +20,7 @@ CloudFormationで必要なYAML知識
 
 ### 1. インデント（超重要！）
 
-**ルール**: **スペース2つ**（タブNG）
+**ルール**: **スペース2つ**（タブはNG!!）
 
 ```yaml
 # ✅ 正しい（スペース2つ）
@@ -70,17 +70,24 @@ Resources:
 ```
 
 **ポイント**:
-- `:` の後にスペース1つ
+- `:` の後には**スペース1つ**
 - インデントでネスト構造を表現
 
 ---
 
 ### 3. 文字列
 
+#### 基本形
+
 ```yaml
 # 通常（クォート不要）
 BucketName: mybucket
 Description: This is my bucket
+Environment: dev
+
+# クォート付き（シングル・ダブル両方OK）
+BucketName: 'mybucket'
+BucketName: "mybucket"
 
 # 数値を文字列として扱う場合（クォート必要）
 Version: "2.0"
@@ -88,6 +95,7 @@ Port: "80"
 
 # 特殊文字がある場合（クォート推奨）
 Description: "Bucket for dev/test environment"
+URL: "http://example.com"
 
 # 複数行（| = 改行保持）⭐ CloudFormationで頻出
 UserData: |
@@ -101,10 +109,161 @@ Description: >
   that spans multiple lines.
 ```
 
+---
+
+#### クォートが必要な場合・不要な場合（重要！）
+
+**基本原則**:
+- Stringは**クォートなし**でも**クォート付き**でもOK
+- ただし、YAMLの文法ルールで**必須の場合**がある
+
+**クォートが必要な6パターン**:
+
+##### ① YAMLが特別な意味として解釈してしまう文字列
+
+```yaml
+# ❌ 間違い（boolean として解釈される）
+Value: yes     # ← true になってしまう
+Value: no      # ← false になってしまう
+Value: on      # ← true になってしまう
+Value: off     # ← false になってしまう
+
+# ❌ 間違い（数値として解釈される）
+Value: 01      # ← 数値 1 になってしまう（ゼロ埋め消える）
+Value: 123e4   # ← 指数表記 1230000 になってしまう
+
+# ✅ 正しい（文字列として扱われる）
+Value: "yes"
+Value: "no"
+Value: "on"
+Value: "off"
+Value: "01"
+Value: "123e4"
+```
+
+##### ② コロン（:）を含む場合
+
+```yaml
+# ❌ 間違い（構文エラー）
+URL: http://example.com
+
+# ✅ 正しい
+URL: "http://example.com"
+KeyValue: "key:value"
+```
+
+##### ③ 先頭が特殊文字（*, &, !, ?, -, @, #）の場合
+
+```yaml
+# ❌ 間違い（YAMLの構文として解釈される）
+Value: *abc     # ← アンカーとして解釈
+Value: !abc     # ← タグとして解釈
+Value: @user    # ← エラー
+
+# ✅ 正しい
+Value: "*abc"
+Value: "!abc"
+Value: "@user"
+Value: "#comment-like"
+```
+
+##### ④ !Sub など組み込み関数の中で文字列を展開する場合
+
+```yaml
+# ❌ 避ける（エラーになる可能性）
+BucketName: !Sub ${ProjectName}-bucket
+
+# ✅ 正しい（シングルクォート推奨）
+BucketName: !Sub '${ProjectName}-bucket'
+BucketName: !Sub "${ProjectName}-bucket"    # ダブルでもOK
+```
+
+##### ⑤ 改行・スペースを保持したい場合
+
+```yaml
+# 複数行の文字列
+Value: |
+  line1
+  line2
+  line3
+
+# 先頭・末尾のスペースを保持
+Value: "  spaced value  "
+```
+
+##### ⑥ JSONやBase64のような複雑な記号を含む場合
+
+```yaml
+# JSON文字列
+JsonData: "{\"key\":\"value\"}"
+
+# Base64エンコード
+EncodedData: "SGVsbG8gV29ybGQ="
+```
+
+---
+
+#### クォートが不要な場合
+
+```yaml
+# 単純な文字列はクォートなしでOK
+Environment: dev
+BucketName: my-bucket
+InstanceName: web-server-01
+InstanceType: t3.micro
+AvailabilityZone: ap-northeast-1a
+SecurityGroup: MySecurityGroup
+```
+
+CloudFormationの典型的なパラメータ値（InstanceType、AZ、タグ名など）は**クォートなし**で問題ありません。
+
+---
+
+#### クォート必要性まとめ（表形式）
+
+| ケース | クォート | 例 |
+|--------|---------|-----|
+| boolean と誤解される文字列 | **必要** | `"yes"`, `"no"`, `"on"`, `"off"` |
+| ゼロ埋め数値 | **必要** | `"01"`, `"001"` |
+| 指数表記に見える文字列 | **必要** | `"123e4"` |
+| コロン（:）を含む | **必要** | `"http://..."`, `"key:value"` |
+| 先頭が特殊文字 | **必要** | `"*abc"`, `"!abc"`, `"@user"` |
+| !Sub の文字列展開 | **必要** | `!Sub '${Env}-app'` |
+| JSON文字列 | **必要** | `"{\"key\":\"value\"}"` |
+| Base64データ | **必要** | `"SGVsbG8gV29ybGQ="` |
+| 単純な文字列 | 不要 | `dev`, `mybucket`, `t3.micro` |
+
+---
+
+#### 実務での鉄則
+
+**迷ったら、Stringはすべてクォートで囲っておけば安全！**
+
+```yaml
+# ✅ 安全策（明示的）
+Environment: "dev"
+InstanceType: "t3.micro"
+BucketName: "mybucket"
+
+# ✅ OK（シンプルな場合）
+Environment: dev
+InstanceType: t3.micro
+BucketName: mybucket
+```
+
+**チーム開発では**:
+- クォートあり：明示的で安全
+- クォートなし：場合によってYAMLが誤解して事故る
+
+**そのため、実務のCFnテンプレートではクォート推奨です。**
+
+---
+
 **CloudFormationでの使い分け**:
-- 通常: クォート不要
+- 通常: クォート不要（ただし安全策としてクォート付きも推奨）
 - UserData: `|` を使う⭐
 - 長い説明: `>` を使う
+- !Sub: **必ずクォート**⭐
 
 ---
 
@@ -240,15 +399,18 @@ Resources:
 
 ---
 
-### 2. クォートのルール
+### 2. クォートのルール（CloudFormation固有）
+
+#### シングル vs ダブル
 
 ```yaml
-# ✅ 推奨（シングルクォート）
+# ✅ 推奨（シングルクォート）⭐
 Description: 'My CloudFormation Template'
 BucketName: !Sub '${ProjectName}-bucket'
 
 # ✅ OK（ダブルクォート）
 Description: "My CloudFormation Template"
+BucketName: !Sub "${ProjectName}-bucket"
 
 # ✅ OK（クォートなし・シンプルな場合）
 Description: My CloudFormation Template
@@ -259,9 +421,11 @@ BucketName: !Sub ${ProjectName}-bucket    # エラーになる可能性
 ```
 
 **CloudFormationでの推奨**:
-- 通常: クォートなし
-- `!Sub`: シングルクォート⭐
-- 特殊文字: シングルクォート
+1. **!Sub**: シングルクォート必須⭐
+2. **通常**: クォートなしでOK（安全策としてクォート付きも推奨）
+3. **特殊文字**: シングルクォート
+
+**詳細な説明は「3. 文字列」セクションを参照**
 
 ---
 
@@ -341,7 +505,7 @@ Resources:
 ### エラー3: クォートミス
 
 ```yaml
-# ❌ エラー
+# ❌ エラー（!Sub でクォートなし）
 BucketName: !Sub ${ProjectName}-bucket
 
 # エラーメッセージ:
@@ -353,6 +517,49 @@ BucketName: !Sub ${ProjectName}-bucket
 ```yaml
 # ✅ 修正後
 BucketName: !Sub '${ProjectName}-bucket'
+```
+
+---
+
+### エラー3-2: boolean と誤解される文字列
+
+```yaml
+# ❌ エラー（yes が true として解釈される）
+Parameters:
+  EnableFeature:
+    Type: String
+    Default: yes    # ← boolean の true になってしまう
+
+# 意図しない動作になる
+```
+
+**対処**: クォートで囲む
+
+```yaml
+# ✅ 修正後
+Parameters:
+  EnableFeature:
+    Type: String
+    Default: "yes"    # ← 文字列として扱われる
+```
+
+---
+
+### エラー3-3: コロンを含む文字列
+
+```yaml
+# ❌ エラー（コロンが構文として解釈される）
+URL: http://example.com
+
+# エラーメッセージ:
+# mapping values are not allowed here
+```
+
+**対処**: クォートで囲む
+
+```yaml
+# ✅ 修正後
+URL: "http://example.com"
 ```
 
 ---
@@ -392,6 +599,8 @@ Tags:
 - [ ] `!Ref`, `!Sub` 等の短縮形を使っている
 - [ ] `!Sub` はシングルクォートで囲んでいる
 - [ ] UserData は `|` を使っている
+- [ ] yes/no/on/off/01 等はクォートで囲んでいる
+- [ ] URLやコロンを含む文字列はクォートで囲んでいる
 
 ### 構造
 - [ ] `Resources:` セクションが必須
@@ -433,11 +642,12 @@ python -c "import yaml; yaml.safe_load(open('template.yaml'))"
 |------|--------|---------|
 | インデント | ★★★★★ | スペース2つ、タブNG |
 | キー・バリュー | ★★★★★ | `: ` 後にスペース |
-| 文字列 | ★★★★☆ | 通常クォート不要 |
+| 文字列 | ★★★★★ | クォートの要否を理解⭐ |
 | リスト | ★★★★★ | ハイフン形式 |
 | コメント | ★★★☆☆ | `#` |
 | 複数行 | ★★★★☆ | UserDataで `|` |
 | 組み込み関数 | ★★★★★ | `!Ref`, `!Sub` 等 |
+| クォートルール | ★★★★★ | yes/no/on/off/01等は必須⭐ |
 
 ### 学習の流れ
 

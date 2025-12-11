@@ -34,15 +34,20 @@ CloudFormationとは何か？なぜ使うのか？
 5. Route Tableを作成・設定
 6. Security Groupを作成
 7. EC2インスタンスを起動
-8. ...（30分〜1時間）
+・・・
+手でぽちぽちつくるのに慣れてる人でも　30分〜1時間はかかる
+人間が作るので、作業ミスも起こり得る(常にもう一人が隣でチェックするなんてことになったらナンセンス。。。)
+
 
 **CloudFormationの場合**:
+
+- 事前に用意した設定ファイルを流せ、という実行命令をひとつ出せば、、、5分後...完成！
+  - 設定ファイル完成後に、誰かに確認してもらえば良い
 ```bash
 aws cloudformation create-stack \
   --stack-name my-web-app \
   --template-body file://template.yaml
 
-# 5分後...完成！
 ```
 
 ---
@@ -58,6 +63,8 @@ aws cloudformation create-stack \
 | 再現困難 | 何度でも再現可能 |
 | 人的ミス多発 | 自動化でミス削減 |
 | バージョン管理不可 | Git管理可能 |
+
+※別の仕組みと組み合わせれば無人で指定時刻に実行することも可能
 
 ---
 

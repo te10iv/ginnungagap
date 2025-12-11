@@ -32,7 +32,7 @@ Resources:              # ← これだけあれば動く！
 AWSTemplateFormatVersion: '2010-09-09'    # 推奨（省略可能）
 Description: テンプレートの説明               # 任意
 
-Parameters:           # 任意（実行時に値を指定したい場合）
+Parameters:           # 任意（変数を書く箇所。環境名・インスタンスタイプ等を実行時に指定）
   Environment:
     Type: String
     Default: dev
@@ -41,7 +41,7 @@ Resources:            # 必須⭐
   MyBucket:
     Type: AWS::S3::Bucket
 
-Outputs:              # 任意（値を出力したい場合）
+Outputs:              # 任意（作成後に決まる値を表示。例：VPC ID、EC2のIP等）
   BucketName:
     Value: !Ref MyBucket
 ```
@@ -61,6 +61,7 @@ Metadata:
 
 # ==========================================
 # Parameters: 入力パラメータ（任意）
+# 変数を書く箇所。環境名・インスタンスタイプ等を実行時に指定できる
 # ==========================================
 Parameters:
   Environment:
@@ -94,6 +95,8 @@ Resources:
 
 # ==========================================
 # Outputs: 出力値（任意）
+# 作成後に決まる値を表示。例：VPC ID、EC2のIPアドレス等
+# 他スタックで参照する場合はExportを使う
 # ==========================================
 Outputs:
   BucketName:
@@ -112,16 +115,17 @@ Outputs:
 | `AWSTemplateFormatVersion` | 推奨 | テンプレート形式バージョン | 初級 |
 | `Description` | 任意 | テンプレート説明 | 初級 |
 | `Metadata` | 任意 | UI設定・メタ情報 | 中級 |
-| `Parameters` | 任意 | 入力パラメータ | 初級 |
+| `Parameters` | 任意 | 入力パラメータ（変数を書く箇所） | 初級 |
 | `Mappings` | 任意 | 環境別設定マップ | 初級 |
 | `Conditions` | 任意 | 条件分岐 | 初級 |
 | **`Resources`** | **必須⭐** | **作成するリソース** | **初級** |
-| `Outputs` | 任意 | 出力値 | 初級 |
+| `Outputs` | 任意 | 出力値（作成後に決まる値を表示） | 初級 |
 
 **ポイント**:
 1. **Resources**: これだけは必須！
-2. **Parameters, Outputs**: 実務ではほぼ必須
-3. **Mappings, Conditions**: 環境別設定で使用
+2. **Parameters**: 変数を書く箇所（環境名・インスタンスタイプ等を実行時に指定）
+3. **Outputs**: 作成後に決まる値を表示（例：VPC ID、EC2のIPアドレス等）
+4. **Mappings, Conditions**: 環境別設定で使用
 
 ---
 
@@ -155,6 +159,121 @@ Parameters:
     Type: AWS::EC2::VPC::Id
     Description: 既存VPC ID
 ```
+
+### 💡 補足：クォートが必要な場合と不要な場合
+
+**基本原則**:
+- String は**クォートなし**でも**クォート付き**でもOK
+- ただし、YAMLの文法ルールで**必須の場合**がある
+
+**クォートが必要な6パターン**:
+
+#### ① YAMLが特別な意味として解釈してしまう文字列
+
+```yaml
+# ❌ 間違い（boolean として解釈される）
+Value: yes     # ← true になってしまう
+Value: no      # ← false になってしまう
+Value: on      # ← true になってしまう
+Value: off     # ← false になってしまう
+
+# ❌ 間違い（数値として解釈される）
+Value: 01      # ← 数値 1 になってしまう
+Value: 123e4   # ← 指数表記になってしまう
+
+# ✅ 正しい
+Value: "yes"
+Value: "no"
+Value: "01"
+Value: "123e4"
+```
+
+#### ② コロン（:）を含む場合
+
+```yaml
+# ❌ 間違い
+Value: http://example.com
+
+# ✅ 正しい
+Value: "http://example.com"
+Value: "key:value"
+```
+
+#### ③ 先頭が特殊文字（*, &, !, ?, -, @, #）の場合
+
+```yaml
+# ❌ 間違い
+Value: *abc
+
+# ✅ 正しい
+Value: "*abc"
+Value: "!abc"
+Value: "@user"
+```
+
+#### ④ !Sub など組み込み関数の中で文字列を展開する場合
+
+```yaml
+# ❌ 避ける
+Value: !Sub ${Env}-${Name}
+
+# ✅ 正しい
+Value: !Sub "${Env}-${Name}"
+Value: !Sub '${Env}-${Name}'    # シングルでもOK
+```
+
+#### ⑤ 改行・スペースを保持したい場合
+
+```yaml
+Value: |
+  line1
+  line2
+```
+
+#### ⑥ JSONやBase64のような複雑な記号を含む場合
+
+```yaml
+Value: "{\"key\":\"value\"}"
+Value: "SGVsbG8gV29ybGQ="
+```
+
+---
+
+#### クォートが不要な場合
+
+```yaml
+# 単純な文字列はクォートなしでOK
+Value: dev
+Value: my-bucket
+Value: web-server-01
+Value: t3.micro
+Value: ap-northeast-1a
+```
+
+---
+
+#### クォート必要性まとめ
+
+| ケース | クォート | 例 |
+|--------|---------|-----|
+| boolean と誤解される文字列 | 必要 | `yes` / `no` / `on` / `off` |
+| ゼロ埋め数値 | 必要 | `01`, `001` |
+| 特殊記号を含む | 必要 | `http://...`, `key:value` |
+| !Sub の文字列展開 | 必要 | `!Sub "${Env}-app"` |
+| 先頭が特殊文字 | 必要 | `*abc`, `!abc` |
+| JSON, Base64 | 必要 | `{"key":"value"}` |
+| 単純な文字列 | 不要 | `dev`, `mybucket` |
+
+---
+
+#### 実務での鉄則
+
+**迷ったら、Stringはすべてクォートで囲っておけば安全！**
+
+- クォートあり：明示的で安全
+- クォートなし：場合によってYAMLが誤解して事故る
+
+**詳細は [yaml-guide-for-cfn.md](yaml-guide-for-cfn.md) を参照**
 
 ---
 
@@ -427,7 +546,66 @@ Resources:
       SubnetId: !ImportValue MyVPC-PublicSubnetId    # ← インポート
 ```
 
-**重要**: Export している値は、参照されている間は削除・変更不可！
+**重要**: 
+- Export している値は、参照されている間は削除・変更不可！
+- Export 名は一意である必要がある
+- Export/ImportValue を使って初めて スタック分割・再利用設計 ができる
+
+---
+
+### 📌 Outputs と Export の違い
+
+**重要な区別**:
+
+```yaml
+# パターン1: Outputs のみ（同じスタック内でのみ使える）
+Outputs:
+  VpcId:
+    Value: !Ref MyVPC    # ← 同じスタック内でしか参照できない
+
+# パターン2: Outputs + Export（他スタックでも使える）
+Outputs:
+  VpcId:
+    Value: !Ref MyVPC
+    Export:
+      Name: MyProject-VpcId    # ← 他スタックから参照可能に！
+```
+
+**スタック間連携の流れ**:
+
+```
+[ VPC Stack ]              [ APP Stack ]
+    ↓ Export                    ↓ ImportValue
+Outputs:                   Resources:
+  VpcId:                     MyEC2:
+    Value: !Ref MyVPC          Properties:
+    Export:                      VpcId: !ImportValue MyProject-VpcId
+      Name: MyProject-VpcId
+```
+
+**実例**:
+
+```yaml
+# stack-vpc.yml（エクスポート側）
+Outputs:
+  VpcId:
+    Description: VPC ID
+    Value: !Ref MyVPC
+    Export:
+      Name: MyVPC-VpcId    # ← エクスポート名
+
+# stack-ec2.yml（インポート側）
+Resources:
+  MyEC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      SubnetId: !ImportValue MyVPC-PublicSubnetId    # ← インポート
+```
+
+**詳細**: [05. Outputs と ImportValue](beginner/05-outputs-imports.md) を参照
+
+
+
 
 ---
 
