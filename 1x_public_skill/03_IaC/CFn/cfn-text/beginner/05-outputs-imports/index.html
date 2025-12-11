@@ -1456,6 +1456,56 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用途
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="用途">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. スタック作成後に値を確認
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 他スタックで参照（Export使用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 外部システムへの情報提供
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#outputs_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1495,7 +1545,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         概要
@@ -1545,7 +1595,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         概要
@@ -1583,7 +1633,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         🔄 スタック間連携のフロー
@@ -1595,10 +1645,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. ネットワークスタック作成
+        全体の流れ
       
     </span>
   </a>
@@ -1606,10 +1656,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-export" class="md-nav__link">
+  <a href="#step-1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Export確認
+        Step 1: ネットワークスタック作成
       
     </span>
   </a>
@@ -1617,10 +1667,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#step-2-export" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. アプリケーションスタック作成
+        Step 2: Export確認
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: アプリケーションスタック作成
       
     </span>
   </a>
@@ -1633,7 +1694,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         🎯 実践例: マイクロサービスアーキテクチャ
@@ -1645,7 +1706,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         スタック構成
@@ -1733,7 +1794,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         💡 ベストプラクティス
@@ -1794,7 +1855,418 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#export-importvalue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚨 Export / ImportValue の失敗例と回避方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚨 Export / ImportValue の失敗例と回避方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#export_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        前提：Export 名の性質
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-export_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ 失敗例 1：後から変えたくなる名前を Export 名にしてしまう
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❌ 失敗例 1：後から変えたくなる名前を Export 名にしてしまう">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        どうなるか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回避策
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ 失敗例 2：Export 名の重複
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❌ 失敗例 2：Export 名の重複">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        どうなるか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回避策
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3import-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ 失敗例 3：Import されている Export を持つスタックを削除しようとして失敗
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❌ 失敗例 3：Import されている Export を持つスタックを削除しようとして失敗">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        どうなるか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回避策
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4export-sub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ 失敗例 4：Export 名をパラメータや !Sub で動的に変えまくる
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❌ 失敗例 4：Export 名をパラメータや !Sub で動的に変えまくる">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        どうなるか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回避策
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-importvalue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ 失敗例 5：別リージョン / 別アカウントで ImportValue しようとする（そもそも不可）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❌ 失敗例 5：別リージョン / 別アカウントで ImportValue しようとする（そもそも不可）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        どうなるか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回避策
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6stacka-stackb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ 失敗例 6：循環参照（StackA ⇄ StackB）が発生する
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❌ 失敗例 6：循環参照（StackA ⇄ StackB）が発生する">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        どうなるか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回避策
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exportimportvalue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ まとめ：Export/ImportValue で事故らないための設計原則
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ まとめ：Export/ImportValue で事故らないための設計原則">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-export_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Export 名は「変えない前提」で設計する
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-export_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Export 名は一意 &amp; 役割がわかる名前にする
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 依存方向は一方向にする
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. クロスリージョン / クロスアカウント連携には使わない
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 基盤スタックは「長生き」、アプリスタックは「短命」
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 実務での心構え
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
     <span class="md-ellipsis">
       
         ✅ このレッスンのチェックリスト
@@ -1805,7 +2277,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#_31" class="md-nav__link">
     <span class="md-ellipsis">
       
         📚 次のステップ
@@ -1895,6 +2367,34 @@
     
   
     CloudFormation 初級チートシート 📋
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yaml-coding-rule-for-team/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    YAML コーディング規約（CloudFormation 含む）
   
 
     
@@ -4574,7 +5074,7 @@
   <span class="md-ellipsis">
     
   
-    Loadmap
+    Aws cli
   
 
     
@@ -4587,6 +5087,89 @@
         
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Aws cli
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../aws-cli/order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Order
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_5" id="__nav_2_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loadmap
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4647,10 +5230,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_6" >
         
           
-          <label class="md-nav__link" for="__nav_2_2_5" id="__nav_2_2_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_2_6" id="__nav_2_2_6_label" tabindex="0">
             
   
   
@@ -4668,8 +5251,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_2_5">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4722,10 +5305,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_5_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_6_2" >
         
           
-          <label class="md-nav__link" for="__nav_2_2_5_2" id="__nav_2_2_5_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_2_6_2" id="__nav_2_2_6_2_label" tabindex="0">
             
   
   
@@ -4743,8 +5326,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_5_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_2_5_2">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_6_2">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4805,10 +5388,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_5_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_6_3" >
         
           
-          <label class="md-nav__link" for="__nav_2_2_5_3" id="__nav_2_2_5_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_2_6_3" id="__nav_2_2_6_3_label" tabindex="0">
             
   
   
@@ -4826,8 +5409,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_5_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_2_5_3">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_6_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -25075,6 +25658,56 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用途
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="用途">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. スタック作成後に値を確認
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 他スタックで参照（Export使用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 外部システムへの情報提供
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#outputs_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -25114,7 +25747,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         概要
@@ -25164,7 +25797,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         概要
@@ -25202,7 +25835,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         🔄 スタック間連携のフロー
@@ -25214,10 +25847,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. ネットワークスタック作成
+        全体の流れ
       
     </span>
   </a>
@@ -25225,10 +25858,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-export" class="md-nav__link">
+  <a href="#step-1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Export確認
+        Step 1: ネットワークスタック作成
       
     </span>
   </a>
@@ -25236,10 +25869,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#step-2-export" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. アプリケーションスタック作成
+        Step 2: Export確認
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: アプリケーションスタック作成
       
     </span>
   </a>
@@ -25252,7 +25896,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         🎯 実践例: マイクロサービスアーキテクチャ
@@ -25264,7 +25908,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         スタック構成
@@ -25352,7 +25996,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         💡 ベストプラクティス
@@ -25413,7 +26057,418 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#export-importvalue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚨 Export / ImportValue の失敗例と回避方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚨 Export / ImportValue の失敗例と回避方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#export_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        前提：Export 名の性質
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-export_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ 失敗例 1：後から変えたくなる名前を Export 名にしてしまう
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❌ 失敗例 1：後から変えたくなる名前を Export 名にしてしまう">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        どうなるか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回避策
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ 失敗例 2：Export 名の重複
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❌ 失敗例 2：Export 名の重複">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        どうなるか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回避策
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3import-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ 失敗例 3：Import されている Export を持つスタックを削除しようとして失敗
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❌ 失敗例 3：Import されている Export を持つスタックを削除しようとして失敗">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        どうなるか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回避策
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4export-sub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ 失敗例 4：Export 名をパラメータや !Sub で動的に変えまくる
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❌ 失敗例 4：Export 名をパラメータや !Sub で動的に変えまくる">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        どうなるか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回避策
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-importvalue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ 失敗例 5：別リージョン / 別アカウントで ImportValue しようとする（そもそも不可）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❌ 失敗例 5：別リージョン / 別アカウントで ImportValue しようとする（そもそも不可）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        どうなるか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回避策
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6stacka-stackb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ 失敗例 6：循環参照（StackA ⇄ StackB）が発生する
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❌ 失敗例 6：循環参照（StackA ⇄ StackB）が発生する">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パターン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        どうなるか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回避策
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exportimportvalue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ まとめ：Export/ImportValue で事故らないための設計原則
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ まとめ：Export/ImportValue で事故らないための設計原則">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-export_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Export 名は「変えない前提」で設計する
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-export_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Export 名は一意 &amp; 役割がわかる名前にする
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 依存方向は一方向にする
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. クロスリージョン / クロスアカウント連携には使わない
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 基盤スタックは「長生き」、アプリスタックは「短命」
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 実務での心構え
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
     <span class="md-ellipsis">
       
         ✅ このレッスンのチェックリスト
@@ -25424,7 +26479,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#_31" class="md-nav__link">
     <span class="md-ellipsis">
       
         📚 次のステップ
@@ -25465,7 +26520,8 @@
 <hr />
 <h2 id="outputs">📤 Outputs（出力値）</h2>
 <h3 id="_2">概要</h3>
-<p><strong>スタックから値を外部に出力</strong></p>
+<p><strong>スタックから値を外部に出力する機能</strong></p>
+<p>CloudFormationでリソースを作成すると、IDやIPアドレスなどが自動的に割り当てられます。Outputsは、これらの<strong>作成後に決まる値を表示</strong>するために使います。</p>
 <pre><code class="language-yaml">Resources:
   MyVPC:
     Type: AWS::EC2::VPC
@@ -25476,12 +26532,28 @@ Outputs:
   VpcId:
     Description: VPC ID
     Value: !Ref MyVPC
-    # コンソールやCLIで確認可能
+    # 実行後に「vpc-0123456789abcdef」のような値が表示される
 </code></pre>
-<p><strong>用途</strong>:
-- ✅ スタック作成後に値を確認
-- ✅ 他スタックで参照（Export使用）
-- ✅ 外部システムへの情報提供</p>
+<p><strong>なぜ必要？</strong></p>
+<p>スタックを作成すると、AWSが自動的にIDを割り当てます：
+- VPC → <code>vpc-0123456789abcdef</code>
+- EC2 → <code>i-0a1b2c3d4e5f6g7h8</code>
+- S3バケット → 指定した名前</p>
+<p>これらの値を<strong>後で確認したり、他のスタックで使うため</strong>にOutputsが必要です。</p>
+<hr />
+<h3 id="_3">用途</h3>
+<h4 id="1">1. スタック作成後に値を確認</h4>
+<pre><code class="language-bash"># CLIで出力値を確認
+aws cloudformation describe-stacks --stack-name my-stack
+
+# 例：作成されたVPC IDを確認
+# &quot;OutputKey&quot;: &quot;VpcId&quot;
+# &quot;OutputValue&quot;: &quot;vpc-0123456789abcdef&quot;
+</code></pre>
+<h4 id="2-export">2. 他スタックで参照（Export使用）</h4>
+<p>後述の Export と組み合わせて、別のスタックから値を参照できます。</p>
+<h4 id="3">3. 外部システムへの情報提供</h4>
+<p>CI/CDツールや監視システムに、作成されたリソースの情報を渡す際に使用します。</p>
 <hr />
 <h3 id="outputs_1">Outputs の基本構文</h3>
 <pre><code class="language-yaml">Outputs:
@@ -25544,15 +26616,28 @@ aws cloudformation describe-stacks \
 </code></pre>
 <hr />
 <h2 id="export">🔗 Export（エクスポート）</h2>
-<h3 id="_3">概要</h3>
+<h3 id="_4">概要</h3>
 <p><strong>Outputsの値を他スタックで使えるようにする</strong></p>
+<p>Outputsだけでは、そのスタック内で値を確認できるだけです。Exportを追加すると、<strong>他のスタックからもその値を参照できる</strong>ようになります。</p>
 <pre><code class="language-yaml">Outputs:
   VpcId:
     Description: VPC ID
     Value: !Ref MyVPC
     Export:
-      Name: MyVPC-VpcId    # ← エクスポート名（他スタックから参照）
+      Name: MyVPC-VpcId    # ← エクスポート名（他スタックから参照可能に）
 </code></pre>
+<p><strong>イメージ</strong>:</p>
+<pre><code>ネットワークスタック（VPC作成）
+  ↓ Export で VPC ID を公開
+アプリケーションスタック（EC2作成）
+  ↓ ImportValue で VPC ID を取得
+  ↓ その VPC 内に EC2 を配置
+</code></pre>
+<p><strong>なぜ必要？</strong></p>
+<p>大規模なシステムでは、リソースを1つのテンプレートで管理すると複雑になります。
+- ネットワーク（VPC、Subnet）は別スタック
+- アプリケーション（EC2、RDS）は別スタック</p>
+<p>このように<strong>分割管理</strong>するために、スタック間で値を受け渡す仕組みが必要です。</p>
 <hr />
 <h3 id="export_1">Export の命名ルール</h3>
 <p><strong>ユニークな名前</strong>が必要（同一リージョン内で重複不可）</p>
@@ -25618,8 +26703,9 @@ Outputs:
 </code></pre>
 <hr />
 <h2 id="importvalue">📥 ImportValue（インポート）</h2>
-<h3 id="_4">概要</h3>
-<p><strong>他スタックのExportされた値を参照</strong></p>
+<h3 id="_5">概要</h3>
+<p><strong>他スタックのExportされた値を参照する</strong></p>
+<p>ImportValueは、他のスタックがExportした値を<strong>自分のスタックで使う</strong>ための機能です。</p>
 <pre><code class="language-yaml"># アプリケーションスタック (app-stack)
 Resources:
   MyEC2:
@@ -25627,8 +26713,30 @@ Resources:
     Properties:
       ImageId: ami-xxxxx
       InstanceType: t3.small
-      SubnetId: !ImportValue network-stack-PublicSubnet1Id    # ← 他スタックから参照
+      SubnetId: !ImportValue network-stack-PublicSubnet1Id    # ← 他スタックから値を取得
 </code></pre>
+<p><strong>仕組み</strong>:</p>
+<ol>
+<li>
+<p><strong>ネットワークスタック</strong>がSubnet IDをExport
+   <code>yaml
+   Outputs:
+     PublicSubnet1Id:
+       Value: subnet-xxxxx
+       Export:
+         Name: network-stack-PublicSubnet1Id</code></p>
+</li>
+<li>
+<p><strong>アプリケーションスタック</strong>がImportValue で取得
+   <code>yaml
+   SubnetId: !ImportValue network-stack-PublicSubnet1Id
+   # → subnet-xxxxx が自動的に入る</code></p>
+</li>
+</ol>
+<p><strong>メリット</strong>:
+- Subnet IDを手動でコピペする必要なし
+- ネットワークスタックを作り直しても、新しいIDが自動的に使われる
+- 値の不整合が起きない</p>
 <hr />
 <h3 id="importvalue_1">ImportValue の基本構文</h3>
 <pre><code class="language-yaml">!ImportValue エクスポート名
@@ -25676,18 +26784,36 @@ Outputs:
     Value: !Ref MyEC2
 </code></pre>
 <hr />
-<h2 id="_5">🔄 スタック間連携のフロー</h2>
-<h3 id="1">1. ネットワークスタック作成</h3>
+<h2 id="_6">🔄 スタック間連携のフロー</h2>
+<h3 id="_7">全体の流れ</h3>
+<pre><code>Step 1: ネットワークスタック作成
+  ↓ VPC、Subnetを作成
+  ↓ VPC ID、Subnet IDをExport
+
+Step 2: Exportの確認
+  ↓ 正しく公開されているか確認
+
+Step 3: アプリケーションスタック作成
+  ↓ ImportValueでVPC ID、Subnet IDを取得
+  ↓ そのネットワーク内にEC2を配置
+</code></pre>
+<hr />
+<h3 id="step-1">Step 1: ネットワークスタック作成</h3>
+<p>まず、VPCやSubnetなどのネットワークリソースを作成します。</p>
 <pre><code class="language-bash"># network-stack を作成
 aws cloudformation create-stack \
   --stack-name network-stack \
   --template-body file://network.yaml
 
-# 完了待ち
+# 完了を待つ（5分程度）
 aws cloudformation wait stack-create-complete \
   --stack-name network-stack
+
+# 完了したら「CREATE_COMPLETE」と表示される
 </code></pre>
-<h3 id="2-export">2. Export確認</h3>
+<hr />
+<h3 id="step-2-export">Step 2: Export確認</h3>
+<p>ネットワークスタックが正しく値をExportしているか確認します。</p>
 <pre><code class="language-bash"># Exportされた値を確認
 aws cloudformation list-exports
 
@@ -25697,25 +26823,32 @@ aws cloudformation list-exports
 #     {
 #       &quot;ExportingStackId&quot;: &quot;arn:aws:cloudformation:...:stack/network-stack/...&quot;,
 #       &quot;Name&quot;: &quot;network-stack-VpcId&quot;,
-#       &quot;Value&quot;: &quot;vpc-0123456789abcdef&quot;
+#       &quot;Value&quot;: &quot;vpc-0123456789abcdef&quot;    # ← この値が他スタックで使える
 #     },
 #     {
 #       &quot;Name&quot;: &quot;network-stack-PublicSubnet1Id&quot;,
-#       &quot;Value&quot;: &quot;subnet-aaa&quot;
+#       &quot;Value&quot;: &quot;subnet-aaa&quot;    # ← この値が他スタックで使える
 #     }
 #   ]
 # }
 </code></pre>
-<h3 id="3">3. アプリケーションスタック作成</h3>
-<pre><code class="language-bash"># app-stack を作成（network-stackに依存）
+<p><strong>ポイント</strong>: ここで表示された <code>Name</code> が ImportValue で指定する名前です。</p>
+<hr />
+<h3 id="step-3">Step 3: アプリケーションスタック作成</h3>
+<p>ネットワークスタックのExport値を使って、EC2などを作成します。</p>
+<pre><code class="language-bash"># app-stack を作成（network-stackのExport値を使用）
 aws cloudformation create-stack \
   --stack-name app-stack \
   --template-body file://app.yaml \
   --parameters ParameterKey=NetworkStackName,ParameterValue=network-stack
+
+# アプリケーションスタックは、ネットワークスタックの値を使って
+# 自動的にVPC内にリソースを配置する
 </code></pre>
+<p><strong>重要</strong>: ネットワークスタックが完成してから、アプリケーションスタックを作成すること！</p>
 <hr />
-<h2 id="_6">🎯 実践例: マイクロサービスアーキテクチャ</h2>
-<h3 id="_7">スタック構成</h3>
+<h2 id="_8">🎯 実践例: マイクロサービスアーキテクチャ</h2>
+<h3 id="_9">スタック構成</h3>
 <pre><code>1. network-stack         # VPC, Subnet, IGW
    ↓
 2. database-stack        # RDS (network-stackに依存)
@@ -25868,50 +27001,355 @@ Outputs:
 <hr />
 <h2 id="importexport">⚠️ Import/Export の制約</h2>
 <h3 id="1-export">1. Export削除の制約</h3>
-<p><strong>Exportを参照しているスタックがあると削除できない</strong></p>
-<pre><code class="language-bash"># エラー例
+<p><strong>重要</strong>: Exportを参照しているスタックがあると、元のスタックは削除できません。</p>
+<p><strong>なぜ？</strong>
+- アプリケーションスタックが「network-stack-VpcId」を使っている状態で
+- ネットワークスタックを削除すると
+- アプリケーションスタックが参照先を失い、エラーになってしまうから</p>
+<p><strong>エラー例</strong>:</p>
+<pre><code class="language-bash"># ネットワークスタックを削除しようとする
 aws cloudformation delete-stack --stack-name network-stack
 
+# エラーメッセージ:
 # Export network-stack-VpcId is still imported by app-stack
+# （app-stackがまだ使っているので削除できません）
 </code></pre>
-<p><strong>対処</strong>: 参照元を先に削除</p>
-<pre><code class="language-bash"># 正しい順序
+<p><strong>正しい削除順序</strong>:</p>
+<pre><code class="language-bash"># 1. まず、参照している側（アプリケーションスタック）を削除
 aws cloudformation delete-stack --stack-name app-stack
 aws cloudformation wait stack-delete-complete --stack-name app-stack
 
+# 2. 次に、参照されている側（ネットワークスタック）を削除
 aws cloudformation delete-stack --stack-name network-stack
 </code></pre>
-<h3 id="2-export_1">2. Export名の変更不可</h3>
-<p><strong>Exportを参照している間は名前変更できない</strong></p>
+<p><strong>覚え方</strong>: <strong>作成の逆順</strong>で削除する
+- 作成: ネットワーク → アプリケーション
+- 削除: アプリケーション → ネットワーク</p>
 <hr />
-<h2 id="_8">💡 ベストプラクティス</h2>
+<h3 id="2-export_1">2. Export名の変更不可</h3>
+<p><strong>Exportを参照している間は、Export名を変更できません</strong></p>
+<p><strong>なぜ？</strong>
+- Export名を変更すると、ImportValueが参照できなくなるから</p>
+<p><strong>対処</strong>:
+1. 参照しているスタックを先に削除
+2. Export名を変更
+3. 参照しているスタックを再作成（新しいExport名で）</p>
+<hr />
+<h2 id="_10">💡 ベストプラクティス</h2>
 <h3 id="1-export_1">1. Export名にスタック名を含める</h3>
+<p><strong>重要</strong>: 
+- Export名は同一リージョン内で一意（ユニーク）である必要があります。
+  - もっというと、同一アカウント・同一リージョン内でグローバルユニークである必要があります。</p>
+<pre><code class="language-yaml"># ✅ 良い例（スタック名を含める）
+Outputs:
+  VpcId:
+    Value: !Ref MyVPC
+    Export:
+      Name: !Sub '${AWS::StackName}-VpcId'
+      # 例: network-stack-VpcId
+
+# ❌ 悪い例（他のスタックと重複しやすい）
+Outputs:
+  VpcId:
+    Value: !Ref MyVPC
+    Export:
+      Name: VpcId
+      # 複数のスタックがこの名前を使うとエラー
+</code></pre>
+<p><strong>なぜスタック名を含める？</strong>
+- 同じテンプレートから複数のスタックを作成できる
+- 環境ごと（dev、stg、prod）にスタックを分けられる</p>
+<hr />
+<h3 id="2">2. スタックの依存関係を明確にする</h3>
+<p><strong>設計例</strong>:</p>
+<pre><code>1. ネットワークスタック（VPC、Subnet）
+   ↓ VPC ID、Subnet IDをExport
+
+2. データベーススタック（RDS）
+   ↓ VPC IDをImport
+   ↓ DB Endpoint をExport
+
+3. アプリケーションスタック（EC2、ALB）
+   ↓ VPC ID、Subnet ID、DB Endpoint をImport
+
+4. 監視スタック（CloudWatch）
+   ↓ 各リソースIDをImport
+</code></pre>
+<p><strong>ポイント</strong>: 依存関係はシンプルに！複雑な相互参照は避ける。</p>
+<hr />
+<h3 id="3_1">3. 削除順序を逆にする</h3>
+<p><strong>鉄則</strong>: <strong>作成の逆順</strong>で削除する</p>
+<pre><code class="language-bash"># 作成順序（下から順に依存）
+1. network-stack       # ← 最初に作成
+2. database-stack      # ← network-stackに依存
+3. app-stack           # ← database-stack、network-stackに依存
+
+# 削除順序（上から順に削除）
+1. app-stack           # ← 最初に削除（依存する側から）
+2. database-stack      # ← 次に削除
+3. network-stack       # ← 最後に削除（依存される側）
+</code></pre>
+<hr />
+<h3 id="4">4. 参照を確認してから削除</h3>
+<p><strong>削除前に必ず確認</strong>:</p>
+<pre><code class="language-bash"># このExportを参照しているスタックを確認
+aws cloudformation list-imports --export-name network-stack-VpcId
+
+# 出力例:
+# {
+#   &quot;Imports&quot;: [
+#     &quot;app-stack&quot;,
+#     &quot;database-stack&quot;
+#   ]
+# }
+
+# この場合、app-stack と database-stack を先に削除する必要がある
+</code></pre>
+<hr />
+<h2 id="export-importvalue">🚨 Export / ImportValue の失敗例と回避方法</h2>
+<h3 id="export_2">前提：Export 名の性質</h3>
+<p><strong>重要な制約</strong>:
+- ✅ 同一アカウント・同一リージョン内でグローバルユニーク
+- ⚠️ 一度 Export すると、その値を Import している限り
+  - Export 名の変更不可
+  - Export の削除不可
+- ⚠️ Import しているスタックがあると、Export 側スタックの削除や一部更新が失敗することがある</p>
+<p><strong>この制約を理解しておくことが、実務での事故防止に超重要です！</strong></p>
+<hr />
+<h3 id="1-export_2">❌ 失敗例 1：後から変えたくなる名前を Export 名にしてしまう</h3>
+<h4 id="_11">パターン</h4>
+<p>最初に「ノリ」でこう書く：</p>
+<pre><code class="language-yaml">Outputs:
+  VpcId:
+    Value: !Ref VPC
+    Export:
+      Name: &quot;Vpc-001&quot;    # ← 後悔する命名
+</code></pre>
+<p>あとで環境が増えてきて：
+- 「やっぱり <code>dev-vpc-id</code> とか、<code>projectA-dev-vpc</code> に変えたい…」
+- でも、すでに他のスタックで <code>!ImportValue Vpc-001</code> を使っている</p>
+<h4 id="_12">どうなるか</h4>
+<ul>
+<li>❌ Export 名を変更しようとすると、CloudFormation の更新がエラーで失敗します</li>
+<li>❌ Import しているスタックが生きている限り、古い Export 名を変えられません</li>
+</ul>
+<h4 id="_13">回避策</h4>
+<p><strong>1. 最初から「将来も変えない前提」の名前にする</strong></p>
 <pre><code class="language-yaml"># ✅ 良い例
 Export:
-  Name: !Sub '${AWS::StackName}-VpcId'
+  Name: pf01-dev-VpcId           # プロジェクト + 環境 + リソース
+  # または
+  Name: projectA-common-vpc-id   # 安定した命名規則
+</code></pre>
+<p><strong>命名パターン</strong>: <code>環境 + 用途 + リソース</code> の組み合わせで安定命名</p>
+<p><strong>2. もしどうしても変えたくなったら</strong></p>
+<pre><code class="language-yaml"># Step 1: 新しい Export 名を追加で作る（古いのも残す）
+Outputs:
+  VpcIdOld:    # 旧
+    Value: !Ref VPC
+    Export:
+      Name: Vpc-001
 
-# ❌ 悪い例（重複しやすい）
-Export:
-  Name: VpcId
+  VpcIdNew:    # 新
+    Value: !Ref VPC
+    Export:
+      Name: projectA-dev-vpc-id
 </code></pre>
-<h3 id="2">2. スタックの依存関係を明確にする</h3>
-<pre><code>ネットワーク → データベース → アプリケーション
-                ↓
-              監視
+<pre><code class="language-yaml"># Step 2: すべての Import 側スタックを順次切り替える
+# 旧：!ImportValue Vpc-001
+# 新：!ImportValue projectA-dev-vpc-id
 </code></pre>
-<h3 id="3_1">3. 削除順序を逆にする</h3>
-<pre><code class="language-bash"># 作成順序
-network-stack → database-stack → app-stack
-
-# 削除順序（逆）
-app-stack → database-stack → network-stack
+<pre><code class="language-bash"># Step 3: 最後に旧 Export を削除
 </code></pre>
-<h3 id="4">4. 参照を確認してから削除</h3>
-<pre><code class="language-bash"># Exportの参照状況を確認
-aws cloudformation list-imports --export-name network-stack-VpcId
-</code></pre>
+<p><strong>結論</strong>: かなり手間なので、<strong>最初の命名設計が超重要</strong>です！</p>
 <hr />
-<h2 id="_9">✅ このレッスンのチェックリスト</h2>
+<h3 id="2export">❌ 失敗例 2：Export 名の重複</h3>
+<h4 id="_14">パターン</h4>
+<p>別チーム or 過去のテンプレートで、うっかり同じ Export 名を使う：</p>
+<pre><code class="language-yaml"># StackA
+Outputs:
+  VpcId:
+    Value: !Ref VPC
+    Export:
+      Name: &quot;projectA-vpc-id&quot;
+
+# StackB（別テンプレート）
+Outputs:
+  AnotherVpcId:
+    Value: !Ref OtherVPC
+    Export:
+      Name: &quot;projectA-vpc-id&quot;   # ← 同じ名前をつけてしまう！
+</code></pre>
+<h4 id="_15">どうなるか</h4>
+<ul>
+<li>❌ 2つ目のスタックの作成 / 更新がエラーで失敗します</li>
+<li>❌ 「すでに同じ Export 名が存在する」という内容のエラーになります</li>
+</ul>
+<h4 id="_16">回避策</h4>
+<p><strong>Export 名は「プロジェクト単位で命名ルールを決める」</strong></p>
+<pre><code>フォーマット例：&lt;System&gt;-&lt;Env&gt;-&lt;Layer&gt;-&lt;Resource&gt;
+
+例：
+- sns-app-dev-network-vpc-id
+- sns-app-dev-app-alb-arn
+- projectA-prod-db-endpoint
+</code></pre>
+<p><strong>重要</strong>: ルールを README や Wiki に残して、チーム全員で共有しておく！</p>
+<hr />
+<h3 id="3import-export">❌ 失敗例 3：Import されている Export を持つスタックを削除しようとして失敗</h3>
+<h4 id="_17">パターン</h4>
+<p>「そろそろ VPC を作り直したいから、network スタック（VPC スタック）ごと消そう」</p>
+<p>しかし、その VPC ID を Export していて、他のスタックが <code>!ImportValue</code> している状態。</p>
+<h4 id="_18">どうなるか</h4>
+<ul>
+<li>❌ network スタックの削除が <strong>ロールバック</strong> します</li>
+<li>❌ 「この Export はまだ他のスタックに Import されているため削除できません」という類のエラー</li>
+</ul>
+<h4 id="_19">回避策</h4>
+<p><strong>依存関係を整理する</strong></p>
+<pre><code class="language-bash"># Step 1: どのスタックが !ImportValue を使っているか洗い出す
+aws cloudformation list-imports --export-name network-stack-VpcId
+
+# Step 2: 依存側スタックを順に対応
+# ① 別の Export に切り替える or パラメータ入力に変える
+# ② スタックを削除する
+
+# Step 3: 最後に Export を持つスタックを削除する
+</code></pre>
+<p><strong>運用設計のポイント</strong>:</p>
+<pre><code>✅ 長寿命（めったに削除しない）
+  - VPC スタック
+  - ネットワーク基盤スタック
+
+❌ 短命（頻繁に作り変える）
+  - App スタック
+  - DB スタック
+</code></pre>
+<p><strong>この役割分担で設計しておくと安全です！</strong></p>
+<hr />
+<h3 id="4export-sub">❌ 失敗例 4：Export 名をパラメータや !Sub で動的に変えまくる</h3>
+<h4 id="_20">パターン</h4>
+<p>こんな感じで Export 名そのものを環境やパラメータに依存させる：</p>
+<pre><code class="language-yaml">Parameters:
+  Env:
+    Type: String
+    AllowedValues: [dev, stg, prod]
+
+Outputs:
+  VpcId:
+    Value: !Ref VPC
+    Export:
+      Name: !Sub &quot;${Env}-VpcId&quot;    # ← 一見良さそうだが...
+</code></pre>
+<p>一見良さそうですが、運用時に：
+- <code>dev</code> → <code>stg</code> に Env パラメータを変更
+- あるいは Env 値を typo で変えてしまう</p>
+<h4 id="_21">どうなるか</h4>
+<ul>
+<li>❌ Export 名自体が変わるため、更新がエラーになります</li>
+<li>❌ 既に <code>dev-VpcId</code> で Import しているスタックがあると、<code>stg-VpcId</code> への変更が拒否されます</li>
+</ul>
+<h4 id="_22">回避策</h4>
+<p><strong>環境ごとに「テンプレートは共通」だが、「スタック名を分ける」のが基本</strong></p>
+<pre><code class="language-bash"># ✅ 正しいパターン
+Stack 名：projectA-network-dev → Export 名：projectA-dev-VpcId
+Stack 名：projectA-network-stg → Export 名：projectA-stg-VpcId
+</code></pre>
+<p><strong>重要</strong>: Export 名の内部で参照する <code>Env</code> は <strong>固定される前提</strong>にする（途中で Env だけ差し替えない）</p>
+<hr />
+<h3 id="5-importvalue">❌ 失敗例 5：別リージョン / 別アカウントで ImportValue しようとする（そもそも不可）</h3>
+<h4 id="_23">パターン</h4>
+<ul>
+<li><code>ap-northeast-1</code> の VPC を <code>us-east-1</code> のスタックから Import したい</li>
+<li>あるいは、別アカウントの Export を Import したい</li>
+</ul>
+<h4 id="_24">どうなるか</h4>
+<ul>
+<li>❌ CloudFormation の仕様上、ImportValue は <strong>同一アカウント・同一リージョン内のみ有効</strong>です</li>
+<li>❌ そのため、Template の検証 or デプロイ時にエラーになります</li>
+</ul>
+<h4 id="_25">回避策</h4>
+<p><strong>クロスアカウント／クロスリージョンで値を共有したい場合は、別の方法を使う</strong></p>
+<ul>
+<li>✅ <strong>SSM Parameter Store</strong></li>
+<li>✅ <strong>Systems Manager (StackSet + Parameters)</strong></li>
+<li>✅ <strong>外部の設定管理</strong>（Git, Parameter ファイルなど）</li>
+</ul>
+<pre><code class="language-yaml"># 例：SSM Parameter Store を使う場合
+Resources:
+  MyEC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      SubnetId: !Sub '{{resolve:ssm:/network/vpc-id}}'
+</code></pre>
+<p><strong>結論</strong>: Export/ImportValue はあくまで「<strong>同アカウント・同リージョン内の IaC 内部連携の仕組み</strong>」と割り切る。</p>
+<hr />
+<h3 id="6stacka-stackb">❌ 失敗例 6：循環参照（StackA ⇄ StackB）が発生する</h3>
+<h4 id="_26">パターン</h4>
+<ul>
+<li>StackA が VPC ID を Export、StackB が Import して ALB を作る</li>
+<li>逆に、StackB 側で作った SG ID を Export して、StackA 側の何かが Import する…など</li>
+</ul>
+<pre><code>StackA → Export VpcId
+  ↑                 ↓
+  └──── Import SGId ← StackB → Export SGId
+</code></pre>
+<h4 id="_27">どうなるか</h4>
+<ul>
+<li>❌ 依存関係が循環し、CloudFormation がどちらを先に作って良いかわからず設計破綻します</li>
+<li>❌ 実際には、デプロイの順番が組めず、エラーや手動介入が必要になる</li>
+</ul>
+<h4 id="_28">回避策</h4>
+<p><strong>依存方向は「一方向だけ」にする</strong></p>
+<pre><code>✅ 正しいパターン
+
+network（VPC / Subnet）
+  ↓
+app（ALB / EC2 / ECS）
+  ↓
+db（RDS / DynamoDB）
+  ↓
+monitoring（CloudWatch）
+</code></pre>
+<p><strong>原則</strong>: 「基盤スタック → 上位スタック」の <strong>一方通行ルール</strong>を決めると、循環は発生しづらいです！</p>
+<hr />
+<h3 id="exportimportvalue">✅ まとめ：Export/ImportValue で事故らないための設計原則</h3>
+<h4 id="1-export_3">1. Export 名は「変えない前提」で設計する</h4>
+<pre><code>命名規則例：system-env-layer-resource
+
+例：
+- sns-app-dev-network-vpc-id
+- projectA-prod-app-alb-arn
+- pf01-stg-db-endpoint
+</code></pre>
+<h4 id="2-export_2">2. Export 名は一意 &amp; 役割がわかる名前にする</h4>
+<ul>
+<li>✅ チーム全員がルールを理解している</li>
+<li>✅ 見ただけで何の値かわかる</li>
+</ul>
+<h4 id="3_2">3. 依存方向は一方向にする</h4>
+<pre><code>network → app → db のような階層構造
+</code></pre>
+<h4 id="4_1">4. クロスリージョン / クロスアカウント連携には使わない</h4>
+<ul>
+<li>Export/ImportValue は同一アカウント・同一リージョン専用</li>
+<li>別の方法（SSM Parameter Store など）を使う</li>
+</ul>
+<h4 id="5">5. 基盤スタックは「長生き」、アプリスタックは「短命」</h4>
+<pre><code>長寿命（Export 側）：VPC、ネットワーク基盤
+短命（Import 側）：App、DB、Lambda
+</code></pre>
+<p><strong>消したい可能性のあるスタック側に Export を置かない！</strong></p>
+<hr />
+<h3 id="_29">💡 実務での心構え</h3>
+<p>このあたりを押さえておくと、</p>
+<ul>
+<li>「Export 名変えたいんだけど…あ、やめとこう」</li>
+<li>「このスタック、他から Import されてないよね？」</li>
+</ul>
+<p>と <strong>事前に事故を未然防止</strong>できるので、実務でかなり安心して CFn を触れるようになります！</p>
+<hr />
+<h2 id="_30">✅ このレッスンのチェックリスト</h2>
 <ul>
 <li>[ ] Outputs の役割を理解した</li>
 <li>[ ] Export で値をエクスポートできる</li>
@@ -25919,9 +27357,11 @@ aws cloudformation list-imports --export-name network-stack-VpcId
 <li>[ ] スタック間の依存関係を設計できる</li>
 <li>[ ] Export削除の制約を理解した</li>
 <li>[ ] 正しい削除順序を理解した</li>
+<li>[ ] Export 名の命名規則の重要性を理解した</li>
+<li>[ ] よくある失敗パターンと回避策を理解した</li>
 </ul>
 <hr />
-<h2 id="_10">📚 次のステップ</h2>
+<h2 id="_31">📚 次のステップ</h2>
 <p>次は <strong><a href="../06-sample-templates-basic/">06. 基礎サンプルテンプレート</a></strong> で、実践的なテンプレートを作成します！</p>
 <hr />
 <p><strong>スタック間連携をマスターして、モジュール化されたインフラを作りましょう！🚀</strong></p>

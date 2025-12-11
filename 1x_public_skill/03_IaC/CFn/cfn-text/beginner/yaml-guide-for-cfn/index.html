@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../99-beginner-cheatsheet/">
+        <link rel="prev" href="../yaml-coding-rule-for-team/">
       
       
         <link rel="next" href="../../intermediate/">
@@ -1471,6 +1471,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../yaml-coding-rule-for-team/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    YAML コーディング規約（CloudFormation 含む）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1615,6 +1643,139 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="3. 文字列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基本形
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        クォートが必要な場合・不要な場合（重要！）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="クォートが必要な場合・不要な場合（重要！）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ① YAMLが特別な意味として解釈してしまう文字列
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ② コロン（:）を含む場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ③ 先頭が特殊文字（*, &amp;, !, ?, -, @, #）の場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-sub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ④ !Sub など組み込み関数の中で文字列を展開する場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑤ 改行・スペースを保持したい場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-jsonbase64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑥ JSONやBase64のような複雑な記号を含む場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        クォートが不要な場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        クォート必要性まとめ（表形式）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        実務での鉄則
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1629,7 +1790,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
+  <a href="#5_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         5. コメント
@@ -1701,13 +1862,30 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2_1" class="md-nav__link">
+  <a href="#2-cloudformation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. クォートのルール
+        2. クォートのルール（CloudFormation固有）
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="2. クォートのルール（CloudFormation固有）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        シングル vs ダブル
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1756,7 +1934,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         ⚠️ よくあるエラーと対処法
@@ -1801,6 +1979,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#3-2-boolean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        エラー3-2: boolean と誤解される文字列
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        エラー3-3: コロンを含む文字列
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#4_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1829,7 +2029,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         基本
@@ -1851,7 +2051,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         構造
@@ -1867,7 +2067,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         🔧 便利なツール
@@ -1906,7 +2106,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
         📖 まとめ
@@ -1929,7 +2129,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       
         学習の流れ
@@ -4591,7 +4791,7 @@
   <span class="md-ellipsis">
     
   
-    Loadmap
+    Aws cli
   
 
     
@@ -4604,6 +4804,89 @@
         
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Aws cli
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../aws-cli/order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Order
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_5" id="__nav_2_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loadmap
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4664,10 +4947,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_6" >
         
           
-          <label class="md-nav__link" for="__nav_2_2_5" id="__nav_2_2_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_2_6" id="__nav_2_2_6_label" tabindex="0">
             
   
   
@@ -4685,8 +4968,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_2_5">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4739,10 +5022,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_5_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_6_2" >
         
           
-          <label class="md-nav__link" for="__nav_2_2_5_2" id="__nav_2_2_5_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_2_6_2" id="__nav_2_2_6_2_label" tabindex="0">
             
   
   
@@ -4760,8 +5043,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_5_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_2_5_2">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_6_2">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4822,10 +5105,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_5_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_6_3" >
         
           
-          <label class="md-nav__link" for="__nav_2_2_5_3" id="__nav_2_2_5_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_2_6_3" id="__nav_2_2_6_3_label" tabindex="0">
             
   
   
@@ -4843,8 +5126,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_5_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_2_5_3">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_6_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -25139,6 +25422,139 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="3. 文字列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基本形
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        クォートが必要な場合・不要な場合（重要！）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="クォートが必要な場合・不要な場合（重要！）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ① YAMLが特別な意味として解釈してしまう文字列
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ② コロン（:）を含む場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ③ 先頭が特殊文字（*, &amp;, !, ?, -, @, #）の場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-sub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ④ !Sub など組み込み関数の中で文字列を展開する場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑤ 改行・スペースを保持したい場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-jsonbase64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⑥ JSONやBase64のような複雑な記号を含む場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        クォートが不要な場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        クォート必要性まとめ（表形式）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        実務での鉄則
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -25153,7 +25569,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
+  <a href="#5_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         5. コメント
@@ -25225,13 +25641,30 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2_1" class="md-nav__link">
+  <a href="#2-cloudformation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. クォートのルール
+        2. クォートのルール（CloudFormation固有）
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="2. クォートのルール（CloudFormation固有）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        シングル vs ダブル
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -25280,7 +25713,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         ⚠️ よくあるエラーと対処法
@@ -25325,6 +25758,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#3-2-boolean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        エラー3-2: boolean と誤解される文字列
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        エラー3-3: コロンを含む文字列
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#4_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -25353,7 +25808,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         基本
@@ -25375,7 +25830,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         構造
@@ -25391,7 +25846,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         🔧 便利なツール
@@ -25430,7 +25885,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
         📖 まとめ
@@ -25453,7 +25908,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       
         学習の流れ
@@ -25502,7 +25957,7 @@
 <hr />
 <h2 id="cloudformationyaml">⭐ CloudFormationで必須のYAML知識</h2>
 <h3 id="1">1. インデント（超重要！）</h3>
-<p><strong>ルール</strong>: <strong>スペース2つ</strong>（タブNG）</p>
+<p><strong>ルール</strong>: <strong>スペース2つ</strong>（タブはNG!!）</p>
 <pre><code class="language-yaml"># ✅ 正しい（スペース2つ）
 Resources:
   MyVPC:
@@ -25543,13 +25998,19 @@ Resources:
       BucketName: mybucket
 </code></pre>
 <p><strong>ポイント</strong>:
-- <code>:</code> の後にスペース1つ
+- <code>:</code> の後には<strong>スペース1つ</strong>
 - インデントでネスト構造を表現</p>
 <hr />
 <h3 id="3">3. 文字列</h3>
+<h4 id="_4">基本形</h4>
 <pre><code class="language-yaml"># 通常（クォート不要）
 BucketName: mybucket
 Description: This is my bucket
+Environment: dev
+
+# クォート付き（シングル・ダブル両方OK）
+BucketName: 'mybucket'
+BucketName: &quot;mybucket&quot;
 
 # 数値を文字列として扱う場合（クォート必要）
 Version: &quot;2.0&quot;
@@ -25557,6 +26018,7 @@ Port: &quot;80&quot;
 
 # 特殊文字がある場合（クォート推奨）
 Description: &quot;Bucket for dev/test environment&quot;
+URL: &quot;http://example.com&quot;
 
 # 複数行（| = 改行保持）⭐ CloudFormationで頻出
 UserData: |
@@ -25569,10 +26031,168 @@ Description: &gt;
   This is a long description
   that spans multiple lines.
 </code></pre>
+<hr />
+<h4 id="_5">クォートが必要な場合・不要な場合（重要！）</h4>
+<p><strong>基本原則</strong>:
+- Stringは<strong>クォートなし</strong>でも<strong>クォート付き</strong>でもOK
+- ただし、YAMLの文法ルールで<strong>必須の場合</strong>がある</p>
+<p><strong>クォートが必要な6パターン</strong>:</p>
+<h5 id="1-yaml">① YAMLが特別な意味として解釈してしまう文字列</h5>
+<pre><code class="language-yaml"># ❌ 間違い（boolean として解釈される）
+Value: yes     # ← true になってしまう
+Value: no      # ← false になってしまう
+Value: on      # ← true になってしまう
+Value: off     # ← false になってしまう
+
+# ❌ 間違い（数値として解釈される）
+Value: 01      # ← 数値 1 になってしまう（ゼロ埋め消える）
+Value: 123e4   # ← 指数表記 1230000 になってしまう
+
+# ✅ 正しい（文字列として扱われる）
+Value: &quot;yes&quot;
+Value: &quot;no&quot;
+Value: &quot;on&quot;
+Value: &quot;off&quot;
+Value: &quot;01&quot;
+Value: &quot;123e4&quot;
+</code></pre>
+<h5 id="2_1">② コロン（:）を含む場合</h5>
+<pre><code class="language-yaml"># ❌ 間違い（構文エラー）
+URL: http://example.com
+
+# ✅ 正しい
+URL: &quot;http://example.com&quot;
+KeyValue: &quot;key:value&quot;
+</code></pre>
+<h5 id="3-">③ 先頭が特殊文字（*, &amp;, !, ?, -, @, #）の場合</h5>
+<pre><code class="language-yaml"># ❌ 間違い（YAMLの構文として解釈される）
+Value: *abc     # ← アンカーとして解釈
+Value: !abc     # ← タグとして解釈
+Value: @user    # ← エラー
+
+# ✅ 正しい
+Value: &quot;*abc&quot;
+Value: &quot;!abc&quot;
+Value: &quot;@user&quot;
+Value: &quot;#comment-like&quot;
+</code></pre>
+<h5 id="4-sub">④ !Sub など組み込み関数の中で文字列を展開する場合</h5>
+<pre><code class="language-yaml"># ❌ 避ける（エラーになる可能性）
+BucketName: !Sub ${ProjectName}-bucket
+
+# ✅ 正しい（シングルクォート推奨）
+BucketName: !Sub '${ProjectName}-bucket'
+BucketName: !Sub &quot;${ProjectName}-bucket&quot;    # ダブルでもOK
+</code></pre>
+<h5 id="5">⑤ 改行・スペースを保持したい場合</h5>
+<pre><code class="language-yaml"># 複数行の文字列
+Value: |
+  line1
+  line2
+  line3
+
+# 先頭・末尾のスペースを保持
+Value: &quot;  spaced value  &quot;
+</code></pre>
+<h5 id="6-jsonbase64">⑥ JSONやBase64のような複雑な記号を含む場合</h5>
+<pre><code class="language-yaml"># JSON文字列
+JsonData: &quot;{\&quot;key\&quot;:\&quot;value\&quot;}&quot;
+
+# Base64エンコード
+EncodedData: &quot;SGVsbG8gV29ybGQ=&quot;
+</code></pre>
+<hr />
+<h4 id="_6">クォートが不要な場合</h4>
+<pre><code class="language-yaml"># 単純な文字列はクォートなしでOK
+Environment: dev
+BucketName: my-bucket
+InstanceName: web-server-01
+InstanceType: t3.micro
+AvailabilityZone: ap-northeast-1a
+SecurityGroup: MySecurityGroup
+</code></pre>
+<p>CloudFormationの典型的なパラメータ値（InstanceType、AZ、タグ名など）は<strong>クォートなし</strong>で問題ありません。</p>
+<hr />
+<h4 id="_7">クォート必要性まとめ（表形式）</h4>
+<table>
+<thead>
+<tr>
+<th>ケース</th>
+<th>クォート</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boolean と誤解される文字列</td>
+<td><strong>必要</strong></td>
+<td><code>"yes"</code>, <code>"no"</code>, <code>"on"</code>, <code>"off"</code></td>
+</tr>
+<tr>
+<td>ゼロ埋め数値</td>
+<td><strong>必要</strong></td>
+<td><code>"01"</code>, <code>"001"</code></td>
+</tr>
+<tr>
+<td>指数表記に見える文字列</td>
+<td><strong>必要</strong></td>
+<td><code>"123e4"</code></td>
+</tr>
+<tr>
+<td>コロン（:）を含む</td>
+<td><strong>必要</strong></td>
+<td><code>"http://..."</code>, <code>"key:value"</code></td>
+</tr>
+<tr>
+<td>先頭が特殊文字</td>
+<td><strong>必要</strong></td>
+<td><code>"*abc"</code>, <code>"!abc"</code>, <code>"@user"</code></td>
+</tr>
+<tr>
+<td>!Sub の文字列展開</td>
+<td><strong>必要</strong></td>
+<td><code>!Sub '${Env}-app'</code></td>
+</tr>
+<tr>
+<td>JSON文字列</td>
+<td><strong>必要</strong></td>
+<td><code>"{\"key\":\"value\"}"</code></td>
+</tr>
+<tr>
+<td>Base64データ</td>
+<td><strong>必要</strong></td>
+<td><code>"SGVsbG8gV29ybGQ="</code></td>
+</tr>
+<tr>
+<td>単純な文字列</td>
+<td>不要</td>
+<td><code>dev</code>, <code>mybucket</code>, <code>t3.micro</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="_8">実務での鉄則</h4>
+<p><strong>迷ったら、Stringはすべてクォートで囲っておけば安全！</strong></p>
+<pre><code class="language-yaml"># ✅ 安全策（明示的）
+Environment: &quot;dev&quot;
+InstanceType: &quot;t3.micro&quot;
+BucketName: &quot;mybucket&quot;
+
+# ✅ OK（シンプルな場合）
+Environment: dev
+InstanceType: t3.micro
+BucketName: mybucket
+</code></pre>
+<p><strong>チーム開発では</strong>:
+- クォートあり：明示的で安全
+- クォートなし：場合によってYAMLが誤解して事故る</p>
+<p><strong>そのため、実務のCFnテンプレートではクォート推奨です。</strong></p>
+<hr />
 <p><strong>CloudFormationでの使い分け</strong>:
-- 通常: クォート不要
+- 通常: クォート不要（ただし安全策としてクォート付きも推奨）
 - UserData: <code>|</code> を使う⭐
-- 長い説明: <code>&gt;</code> を使う</p>
+- 長い説明: <code>&gt;</code> を使う
+- !Sub: <strong>必ずクォート</strong>⭐</p>
 <hr />
 <h3 id="4">4. リスト</h3>
 <pre><code class="language-yaml"># 方法1: ハイフン（CloudFormationで推奨）
@@ -25603,7 +26223,7 @@ Ports: [80, 443]
           Value: WebServer
 </code></pre>
 <hr />
-<h3 id="5">5. コメント</h3>
+<h3 id="5_1">5. コメント</h3>
 <pre><code class="language-yaml"># これはコメント
 Resources:
   MyBucket:    # 行末コメント
@@ -25675,13 +26295,15 @@ Resources:
 - <code>!</code> から始まるのがCloudFormation固有
 - 短縮形を使う⭐</p>
 <hr />
-<h3 id="2_1">2. クォートのルール</h3>
-<pre><code class="language-yaml"># ✅ 推奨（シングルクォート）
+<h3 id="2-cloudformation">2. クォートのルール（CloudFormation固有）</h3>
+<h4 id="vs">シングル vs ダブル</h4>
+<pre><code class="language-yaml"># ✅ 推奨（シングルクォート）⭐
 Description: 'My CloudFormation Template'
 BucketName: !Sub '${ProjectName}-bucket'
 
 # ✅ OK（ダブルクォート）
 Description: &quot;My CloudFormation Template&quot;
+BucketName: !Sub &quot;${ProjectName}-bucket&quot;
 
 # ✅ OK（クォートなし・シンプルな場合）
 Description: My CloudFormation Template
@@ -25691,9 +26313,10 @@ BucketName: mybucket
 BucketName: !Sub ${ProjectName}-bucket    # エラーになる可能性
 </code></pre>
 <p><strong>CloudFormationでの推奨</strong>:
-- 通常: クォートなし
-- <code>!Sub</code>: シングルクォート⭐
-- 特殊文字: シングルクォート</p>
+1. <strong>!Sub</strong>: シングルクォート必須⭐
+2. <strong>通常</strong>: クォートなしでOK（安全策としてクォート付きも推奨）
+3. <strong>特殊文字</strong>: シングルクォート</p>
+<p><strong>詳細な説明は「3. 文字列」セクションを参照</strong></p>
 <hr />
 <h2 id="yaml">📚 参考：一般的なYAML知識</h2>
 <h3 id="cloudformation_1">アンカー・エイリアス（CloudFormationでは非対応）</h3>
@@ -25718,7 +26341,7 @@ binary: !!binary base64data
 # - 日付型、バイナリ型は使わない
 </code></pre>
 <hr />
-<h2 id="_4">⚠️ よくあるエラーと対処法</h2>
+<h2 id="_9">⚠️ よくあるエラーと対処法</h2>
 <h3 id="1_2">エラー1: インデントミス</h3>
 <pre><code class="language-yaml"># ❌ エラー
 Resources:
@@ -25746,7 +26369,7 @@ Resources:
 <p><strong>対処</strong>: タブをスペースに変換（VSCodeの設定）</p>
 <hr />
 <h3 id="3_1">エラー3: クォートミス</h3>
-<pre><code class="language-yaml"># ❌ エラー
+<pre><code class="language-yaml"># ❌ エラー（!Sub でクォートなし）
 BucketName: !Sub ${ProjectName}-bucket
 
 # エラーメッセージ:
@@ -25755,6 +26378,35 @@ BucketName: !Sub ${ProjectName}-bucket
 <p><strong>対処</strong>: !Sub は必ずクォート</p>
 <pre><code class="language-yaml"># ✅ 修正後
 BucketName: !Sub '${ProjectName}-bucket'
+</code></pre>
+<hr />
+<h3 id="3-2-boolean">エラー3-2: boolean と誤解される文字列</h3>
+<pre><code class="language-yaml"># ❌ エラー（yes が true として解釈される）
+Parameters:
+  EnableFeature:
+    Type: String
+    Default: yes    # ← boolean の true になってしまう
+
+# 意図しない動作になる
+</code></pre>
+<p><strong>対処</strong>: クォートで囲む</p>
+<pre><code class="language-yaml"># ✅ 修正後
+Parameters:
+  EnableFeature:
+    Type: String
+    Default: &quot;yes&quot;    # ← 文字列として扱われる
+</code></pre>
+<hr />
+<h3 id="3-3">エラー3-3: コロンを含む文字列</h3>
+<pre><code class="language-yaml"># ❌ エラー（コロンが構文として解釈される）
+URL: http://example.com
+
+# エラーメッセージ:
+# mapping values are not allowed here
+</code></pre>
+<p><strong>対処</strong>: クォートで囲む</p>
+<pre><code class="language-yaml"># ✅ 修正後
+URL: &quot;http://example.com&quot;
 </code></pre>
 <hr />
 <h3 id="4_1">エラー4: リストのインデント</h3>
@@ -25774,7 +26426,7 @@ Tags:
 </code></pre>
 <hr />
 <h2 id="cloudformationyaml_1">✅ CloudFormation用YAML チェックリスト</h2>
-<h3 id="_5">基本</h3>
+<h3 id="_10">基本</h3>
 <ul>
 <li>[ ] インデントはスペース2つ</li>
 <li>[ ] タブは使っていない</li>
@@ -25786,15 +26438,17 @@ Tags:
 <li>[ ] <code>!Ref</code>, <code>!Sub</code> 等の短縮形を使っている</li>
 <li>[ ] <code>!Sub</code> はシングルクォートで囲んでいる</li>
 <li>[ ] UserData は <code>|</code> を使っている</li>
+<li>[ ] yes/no/on/off/01 等はクォートで囲んでいる</li>
+<li>[ ] URLやコロンを含む文字列はクォートで囲んでいる</li>
 </ul>
-<h3 id="_6">構造</h3>
+<h3 id="_11">構造</h3>
 <ul>
 <li>[ ] <code>Resources:</code> セクションが必須</li>
 <li>[ ] <code>Type:</code> が各リソースに必須</li>
 <li>[ ] インデントが正しい</li>
 </ul>
 <hr />
-<h2 id="_7">🔧 便利なツール</h2>
+<h2 id="_12">🔧 便利なツール</h2>
 <h3 id="vscode">VSCode拡張機能</h3>
 <pre><code class="language-bash"># YAML拡張
 code --install-extension redhat.vscode-yaml
@@ -25811,7 +26465,7 @@ cfn-lint template.yaml
 python -c &quot;import yaml; yaml.safe_load(open('template.yaml'))&quot;
 </code></pre>
 <hr />
-<h2 id="_8">📖 まとめ</h2>
+<h2 id="_13">📖 まとめ</h2>
 <h3 id="cloudformationyaml_2">CloudFormationで必要なYAML知識</h3>
 <table>
 <thead>
@@ -25834,8 +26488,8 @@ python -c &quot;import yaml; yaml.safe_load(open('template.yaml'))&quot;
 </tr>
 <tr>
 <td>文字列</td>
-<td>★★★★☆</td>
-<td>通常クォート不要</td>
+<td>★★★★★</td>
+<td>クォートの要否を理解⭐</td>
 </tr>
 <tr>
 <td>リスト</td>
@@ -25857,9 +26511,14 @@ python -c &quot;import yaml; yaml.safe_load(open('template.yaml'))&quot;
 <td>★★★★★</td>
 <td><code>!Ref</code>, <code>!Sub</code> 等</td>
 </tr>
+<tr>
+<td>クォートルール</td>
+<td>★★★★★</td>
+<td>yes/no/on/off/01等は必須⭐</td>
+</tr>
 </tbody>
 </table>
-<h3 id="_9">学習の流れ</h3>
+<h3 id="_14">学習の流れ</h3>
 <ol>
 <li>✅ このYAMLガイドを読む</li>
 <li>✅ <a href="../01-cfn-basics/">01. CFn基礎</a> に戻る</li>
