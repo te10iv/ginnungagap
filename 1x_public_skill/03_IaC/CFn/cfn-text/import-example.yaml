@@ -1,0 +1,161 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'ImportValue Example - Using Outputs from after-advanced.yaml'
+
+# ==========================================
+# ✅ このテンプレートは after-advanced.yaml の
+#    Outputs を ImportValue で参照する例
+# ==========================================
+
+Parameters:
+  NetworkStackName:
+    Type: String
+    Default: myapp-dev-stack
+    Description: Name of the network stack to import from
+
+Resources:
+  # ==========================================
+  # 新しいEC2インスタンス
+  # ==========================================
+  AdditionalWebServer:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Sub '{{resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2}}'
+      InstanceType: t3.small
+      
+      # ✅ 他スタックのPublic Subnetを使用
+      SubnetId: !Select 
+        - 0
+        - !Split 
+          - ','
+          - !ImportValue                                    # ✅ ImportValue でインポート
+              Fn::Sub: '${NetworkStackName}-PublicSubnets'
+      
+      # ✅ 他スタックのSecurity Groupを使用
+      SecurityGroupIds:
+        - !ImportValue                                      # ✅ ImportValue
+            Fn::Sub: '${NetworkStackName}-WebSG'
+      
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          yum update -y
+          yum install -y httpd mysql
+          systemctl start httpd
+          systemctl enable httpd
+          
+          # ✅ 他スタックのDB Endpointを使用
+          DB_ENDPOINT="${ImportValue ${NetworkStackName}-DBEndpoint}"
+          
+          cat > /var/www/html/index.html <<EOF
+          <html>
+          <head><title>Additional Server</title></head>
+          <body>
+            <h1>Additional Web Server</h1>
+            <p>Connected to DB: \${DB_ENDPOINT}</p>
+            <p>Using imported network resources</p>
+          </body>
+          </html>
+          EOF
+      
+      Tags:
+        - Key: Name
+          Value: additional-web-server
+
+  # ==========================================
+  # 新しいLambda Function
+  # ==========================================
+  MyLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: db-query-function
+      Runtime: python3.11
+      Handler: index.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      
+      # ✅ 他スタックのPrivate Subnetで起動
+      VpcConfig:
+        SubnetIds: !Split
+          - ','
+          - !ImportValue
+              Fn::Sub: '${NetworkStackName}-PrivateSubnets'
+        
+        # ✅ 他スタックのDB Security Groupを使用
+        SecurityGroupIds:
+          - !ImportValue
+              Fn::Sub: '${NetworkStackName}-DBSG'
+      
+      Environment:
+        Variables:
+          # ✅ 他スタックのDB Endpointを環境変数で渡す
+          DB_ENDPOINT: !ImportValue
+            Fn::Sub: '${NetworkStackName}-DBEndpoint'
+      
+      Code:
+        ZipFile: |
+          import os
+          import pymysql
+          
+          def lambda_handler(event, context):
+              db_endpoint = os.environ['DB_ENDPOINT']
+              print(f"Connecting to: {db_endpoint}")
+              
+              # DB接続処理
+              # connection = pymysql.connect(host=db_endpoint, ...)
+              
+              return {
+                  'statusCode': 200,
+                  'body': f'Connected to {db_endpoint}'
+              }
+
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
+
+# ==========================================
+# Outputs
+# ==========================================
+Outputs:
+  AdditionalServerIP:
+    Description: Additional Web Server Public IP
+    Value: !GetAtt AdditionalWebServer.PublicIp
+  
+  LambdaFunctionArn:
+    Description: Lambda Function ARN
+    Value: !GetAtt MyLambdaFunction.Arn
+  
+  UsedNetworkStack:
+    Description: Network Stack Name
+    Value: !Ref NetworkStackName
+
+# ==========================================
+# 💡 使用方法:
+# 
+# 1. まず after-advanced.yaml をデプロイ
+#    aws cloudformation create-stack \
+#      --stack-name myapp-dev-stack \
+#      --template-body file://after-advanced.yaml \
+#      --parameters ParameterKey=DBPassword,ParameterValue=SecurePass123!
+# 
+# 2. 次にこのテンプレートをデプロイ
+#    aws cloudformation create-stack \
+#      --stack-name myapp-dev-additional \
+#      --template-body file://import-example.yaml \
+#      --parameters ParameterKey=NetworkStackName,ParameterValue=myapp-dev-stack \
+#      --capabilities CAPABILITY_IAM
+# 
+# ⚠️ 削除時は逆順:
+# 1. このスタック削除
+#    aws cloudformation delete-stack --stack-name myapp-dev-additional
+# 
+# 2. 元のスタック削除
+#    aws cloudformation delete-stack --stack-name myapp-dev-stack
+# ==========================================

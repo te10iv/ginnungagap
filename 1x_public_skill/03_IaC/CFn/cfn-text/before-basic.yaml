@@ -1,0 +1,253 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Before: Basic CloudFormation Template (Hard-coded)'
+
+# ==========================================
+# ❌ 問題点:
+# 1. すべてハードコード
+# 2. 環境変更が困難
+# 3. 重複コードが多い
+# 4. リージョン依存
+# 5. スタック間連携不可
+# ==========================================
+
+Resources:
+  # ==========================================
+  # VPC
+  # ==========================================
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      Tags:
+        - Key: Name
+          Value: myapp-dev-vpc                    # ❌ ハードコード
+
+  # ==========================================
+  # Internet Gateway
+  # ==========================================
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: myapp-dev-igw                    # ❌ ハードコード
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: vpc-xxxxx                            # ❌ ハードコード（実際は不可）
+      InternetGatewayId: igw-xxxxx                # ❌ ハードコード（実際は不可）
+
+  # ==========================================
+  # Public Subnets
+  # ==========================================
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: vpc-xxxxx                            # ❌ 毎回同じ値を記述
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone: ap-northeast-1a           # ❌ リージョン依存
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: myapp-dev-public-1a              # ❌ ハードコード
+
+  PublicSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: vpc-xxxxx                            # ❌ 重複
+      CidrBlock: 10.0.2.0/24
+      AvailabilityZone: ap-northeast-1c           # ❌ リージョン依存
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: myapp-dev-public-1c              # ❌ ハードコード
+
+  # ==========================================
+  # Private Subnets
+  # ==========================================
+  PrivateSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: vpc-xxxxx                            # ❌ 重複
+      CidrBlock: 10.0.11.0/24
+      AvailabilityZone: ap-northeast-1a           # ❌ リージョン依存
+      Tags:
+        - Key: Name
+          Value: myapp-dev-private-1a             # ❌ ハードコード
+
+  PrivateSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: vpc-xxxxx                            # ❌ 重複
+      CidrBlock: 10.0.12.0/24
+      AvailabilityZone: ap-northeast-1c           # ❌ リージョン依存
+      Tags:
+        - Key: Name
+          Value: myapp-dev-private-1c             # ❌ ハードコード
+
+  # ==========================================
+  # Route Table
+  # ==========================================
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: vpc-xxxxx                            # ❌ 重複
+      Tags:
+        - Key: Name
+          Value: myapp-dev-public-rt              # ❌ ハードコード
+
+  PublicRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: rtb-xxxxx                     # ❌ ハードコード
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: igw-xxxxx                        # ❌ ハードコード
+
+  SubnetRouteTableAssociation1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: subnet-xxxxx                      # ❌ ハードコード
+      RouteTableId: rtb-xxxxx                     # ❌ ハードコード
+
+  SubnetRouteTableAssociation2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: subnet-yyyyy                      # ❌ ハードコード
+      RouteTableId: rtb-xxxxx                     # ❌ ハードコード
+
+  # ==========================================
+  # Security Groups
+  # ==========================================
+  WebSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: myapp-dev-web-sg                 # ❌ ハードコード
+      GroupDescription: Web server security group
+      VpcId: vpc-xxxxx                            # ❌ 重複
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: myapp-dev-web-sg                 # ❌ ハードコード
+
+  DBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: myapp-dev-db-sg                  # ❌ ハードコード
+      GroupDescription: Database security group
+      VpcId: vpc-xxxxx                            # ❌ 重複
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          SourceSecurityGroupId: sg-xxxxx         # ❌ ハードコード
+      Tags:
+        - Key: Name
+          Value: myapp-dev-db-sg                  # ❌ ハードコード
+
+  # ==========================================
+  # EC2 Instances
+  # ==========================================
+  WebServer1:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0c3fd0f5d33134a76               # ❌ リージョン・時期依存AMI
+      InstanceType: t3.small                       # ❌ ハードコード
+      SubnetId: subnet-xxxxx                       # ❌ ハードコード
+      SecurityGroupIds:
+        - sg-xxxxx                                 # ❌ ハードコード
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          yum update -y
+          yum install -y httpd
+          systemctl start httpd
+          systemctl enable httpd
+          echo "<h1>Web Server 1 - myapp-dev</h1>" > /var/www/html/index.html
+          # ❌ 環境名がハードコード
+      Tags:
+        - Key: Name
+          Value: myapp-dev-web-1                   # ❌ ハードコード
+
+  WebServer2:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0c3fd0f5d33134a76               # ❌ 同じAMI IDを重複記述
+      InstanceType: t3.small                       # ❌ 重複
+      SubnetId: subnet-yyyyy                       # ❌ ハードコード
+      SecurityGroupIds:
+        - sg-xxxxx                                 # ❌ 重複
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          yum update -y
+          yum install -y httpd
+          systemctl start httpd
+          systemctl enable httpd
+          echo "<h1>Web Server 2 - myapp-dev</h1>" > /var/www/html/index.html
+          # ❌ ほぼ同じコードを2回
+      Tags:
+        - Key: Name
+          Value: myapp-dev-web-2                   # ❌ ハードコード
+
+  # ==========================================
+  # RDS
+  # ==========================================
+  DBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupName: myapp-dev-db-subnet-group # ❌ ハードコード
+      DBSubnetGroupDescription: DB subnet group
+      SubnetIds:
+        - subnet-aaaaa                             # ❌ ハードコード
+        - subnet-bbbbb                             # ❌ ハードコード
+      Tags:
+        - Key: Name
+          Value: myapp-dev-db-subnet-group         # ❌ ハードコード
+
+  PrimaryDatabase:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: myapp-dev-db-primary   # ❌ ハードコード
+      Engine: mysql
+      EngineVersion: '8.0.35'
+      DBInstanceClass: db.t3.small                 # ❌ ハードコード
+      AllocatedStorage: 50
+      StorageType: gp3
+      StorageEncrypted: true
+      DBName: appdb
+      MasterUsername: admin
+      MasterUserPassword: MyPassword123!           # ❌ 平文パスワード（超危険！）
+      VPCSecurityGroups:
+        - sg-xxxxx                                 # ❌ ハードコード
+      DBSubnetGroupName: myapp-dev-db-subnet-group # ❌ ハードコード
+      BackupRetentionPeriod: 7
+      Tags:
+        - Key: Name
+          Value: myapp-dev-db-primary              # ❌ ハードコード
+
+  ReadReplica:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: myapp-dev-db-replica   # ❌ ハードコード
+      SourceDBInstanceIdentifier: myapp-dev-db-primary # ❌ ハードコード
+      DBInstanceClass: db.t3.small                 # ❌ 重複
+      PubliclyAccessible: false
+      Tags:
+        - Key: Name
+          Value: myapp-dev-db-replica              # ❌ ハードコード
+
+# ==========================================
+# ❌ Outputs がない
+# → 他のスタックで値を再利用できない
+# ==========================================

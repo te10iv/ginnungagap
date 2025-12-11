@@ -1,0 +1,38 @@
+# ==========================================
+# Terraform Variables - Production Environment
+# ==========================================
+
+project_name = "myapp"
+environment  = "prod"
+region       = "ap-northeast-1"
+
+# VPC Configuration
+vpc_cidr           = "10.0.0.0/16"
+availability_zones = ["ap-northeast-1a", "ap-northeast-1c"]
+
+public_subnet_cidrs = {
+  "ap-northeast-1a" = "10.0.1.0/24"
+  "ap-northeast-1c" = "10.0.2.0/24"
+}
+
+private_subnet_cidrs = {
+  "ap-northeast-1a" = "10.0.11.0/24"
+  "ap-northeast-1c" = "10.0.12.0/24"
+}
+
+# EC2 Configuration (Production Specs)
+instance_type  = "m5.large"
+instance_count = 2
+
+# RDS Configuration (Production Specs)
+db_instance_class   = "db.r6i.large"
+db_username         = "admin"
+db_password         = "CHANGE_ME_VerySecurePassword456!"  # ⚠️ 必ず変更すること
+create_read_replica = true  # 本番環境はRead Replica作成
+
+# Common Tags
+common_tags = {
+  CostCenter = "Production"
+  Owner      = "DevOps Team"
+  Backup     = "Required"
+}
