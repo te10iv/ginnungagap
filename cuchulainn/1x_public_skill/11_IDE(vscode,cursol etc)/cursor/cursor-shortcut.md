@@ -1,5 +1,22 @@
 # Cursor ショートカットキー（mac/win）
 
+## 備忘録
+
+- Markdown プレビューの表示／非表示
+  - Cmd + Shift + V
+  - Ctrl + Shift + V
+
+- cursol チャットウィンドウ 表示 非表示 ショートカット
+  - macOS: Command + L
+  - Windows / Linux: Ctrl + L
+
+- コメントアウト
+  - Ctrl + /
+
+
+
+cursol-sh
+
 ## よく使う
 
 | 操作 | Mac | Windows |
